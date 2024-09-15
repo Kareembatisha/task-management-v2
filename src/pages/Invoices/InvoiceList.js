@@ -24,8 +24,7 @@ import FeatherIcon from "feather-icons-react";
 
 import Loader from "../../Components/Common/Loader";
 
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from "react-toastify";
 
 import { invoiceWidgets } from "../../common/data/invoiceList";
 //Import actions
@@ -53,9 +52,9 @@ const InvoiceList = () => {
     })
   );
   // Inside your component
-  const {
-    invoices, isInvoiceSuccess, error
-  } = useSelector(selectinvoiceProperties);
+  const { invoices, isInvoiceSuccess, error } = useSelector(
+    selectinvoiceProperties
+  );
 
   //delete invoice
   const [deleteModal, setDeleteModal] = useState(false);
@@ -86,7 +85,7 @@ const InvoiceList = () => {
     }
   };
 
-  const handleValidDate = date => {
+  const handleValidDate = (date) => {
     const date1 = moment(new Date(date)).format("DD MMM Y");
     return date1;
   };
@@ -102,7 +101,8 @@ const InvoiceList = () => {
     } else {
       meridiem = "AM";
     }
-    const updateTime = moment(getTime, 'hh:mm').format('hh:mm') + " " + meridiem;
+    const updateTime =
+      moment(getTime, "hh:mm").format("hh:mm") + " " + meridiem;
     return updateTime;
   };
 
@@ -131,7 +131,9 @@ const InvoiceList = () => {
     const checkall = document.getElementById("checkBoxAll");
     selectedCheckBoxDelete.forEach((element) => {
       dispatch(onDeleteInvoice(element.value));
-      setTimeout(() => { toast.clearWaitingQueue(); }, 3000);
+      setTimeout(() => {
+        toast.clearWaitingQueue();
+      }, 3000);
     });
     setIsMultiDeleteButton(false);
     checkall.checked = false;
@@ -139,7 +141,9 @@ const InvoiceList = () => {
 
   const deleteCheckbox = () => {
     const ele = document.querySelectorAll(".invoiceCheckBox:checked");
-    ele.length > 0 ? setIsMultiDeleteButton(true) : setIsMultiDeleteButton(false);
+    ele.length > 0
+      ? setIsMultiDeleteButton(true)
+      : setIsMultiDeleteButton(false);
     setSelectedCheckBoxDelete(ele);
   };
 
@@ -147,11 +151,25 @@ const InvoiceList = () => {
   const columns = useMemo(
     () => [
       {
-        header: <input type="checkbox" id="checkBoxAll" className="form-check-input" onClick={() => checkedAll()} />,
+        header: (
+          <input
+            type="checkbox"
+            id="checkBoxAll"
+            className="form-check-input"
+            onClick={() => checkedAll()}
+          />
+        ),
         cell: (cell) => {
-          return <input type="checkbox" className="invoiceCheckBox form-check-input" value={cell.getValue()} onChange={() => deleteCheckbox()} />;
+          return (
+            <input
+              type="checkbox"
+              className="invoiceCheckBox form-check-input"
+              value={cell.getValue()}
+              onChange={() => deleteCheckbox()}
+            />
+          );
         },
-        id: '#',
+        id: "#",
         accessorKey: "_id",
         enableColumnFilter: false,
         enableSorting: false,
@@ -161,7 +179,14 @@ const InvoiceList = () => {
         accessorKey: "invoiceId",
         enableColumnFilter: false,
         cell: (cell) => {
-          return <Link to="/apps-invoices-details" className="fw-medium link-primary">{cell.getValue()}</Link>;
+          return (
+            <Link
+              to="/apps-invoices-details"
+              className="fw-medium link-primary"
+            >
+              {cell.getValue()}
+            </Link>
+          );
         },
       },
       {
@@ -171,16 +196,28 @@ const InvoiceList = () => {
         cell: (cell) => (
           <>
             <div className="d-flex align-items-center">
-              {cell.row.original.img ? <img
-                src={process.env.REACT_APP_API_URL + "/images/users/" + cell.row.original.img}
-                alt=""
-                className="avatar-xs rounded-circle me-2"
-              /> :
+              {cell.row.original.img ? (
+                <img
+                  src={
+                    process.env.REACT_APP_API_URL +
+                    "/images/users/" +
+                    cell.row.original.img
+                  }
+                  alt=""
+                  className="avatar-xs rounded-circle me-2"
+                />
+              ) : (
                 <div className="flex-shrink-0 avatar-xs me-2">
                   <div className="avatar-title bg-success-subtle text-success rounded-circle fs-13">
-                    {cell.row.original.name.charAt(0) + cell.row.original.name.split(" ").slice(-1).toString().charAt(0)}
+                    {cell.row.original.name.charAt(0) +
+                      cell.row.original.name
+                        .split(" ")
+                        .slice(-1)
+                        .toString()
+                        .charAt(0)}
                   </div>
-                </div>}
+                </div>
+              )}
               {cell.getValue()}
             </div>
           </>
@@ -203,7 +240,9 @@ const InvoiceList = () => {
         cell: (cell) => (
           <>
             {handleValidDate(cell.getValue())},{" "}
-            <small className="text-muted">{handleValidTime(cell.getValue())}</small>
+            <small className="text-muted">
+              {handleValidTime(cell.getValue())}
+            </small>
           </>
         ),
       },
@@ -219,21 +258,41 @@ const InvoiceList = () => {
         cell: (cell) => {
           switch (cell.getValue()) {
             case "Paid":
-              return <span className="badge text-uppercase bg-success-subtle text-success"> {cell.getValue()} </span>;
+              return (
+                <span className="badge text-uppercase bg-success-subtle text-success">
+                  {" "}
+                  {cell.getValue()}{" "}
+                </span>
+              );
             case "Unpaid":
-              return <span className="badge text-uppercase bg-warning-subtle text-warning"> {cell.getValue()} </span>;
+              return (
+                <span className="badge text-uppercase bg-warning-subtle text-warning">
+                  {" "}
+                  {cell.getValue()}{" "}
+                </span>
+              );
             case "Cancel":
-              return <span className="badge text-uppercase bg-danger-subtle text-danger"> {cell.getValue()} </span>;
+              return (
+                <span className="badge text-uppercase bg-danger-subtle text-danger">
+                  {" "}
+                  {cell.getValue()}{" "}
+                </span>
+              );
             default:
-              return <span className="badge text-uppercase bg-primary-subtle text-primary"> {cell.getValue()} </span>;
+              return (
+                <span className="badge text-uppercase bg-primary-subtle text-primary">
+                  {" "}
+                  {cell.getValue()}{" "}
+                </span>
+              );
           }
-        }
+        },
       },
       {
         header: "Action",
         cell: (cellProps) => {
           return (
-            <UncontrolledDropdown >
+            <UncontrolledDropdown>
               <DropdownToggle
                 href="#"
                 className="btn btn-soft-secondary btn-sm dropdown"
@@ -261,7 +320,10 @@ const InvoiceList = () => {
 
                 <DropdownItem
                   href="#"
-                  onClick={() => { const invoiceData = cellProps.row.original; onClickDelete(invoiceData); }}
+                  onClick={() => {
+                    const invoiceData = cellProps.row.original;
+                    onClickDelete(invoiceData);
+                  }}
                 >
                   <i className="ri-delete-bin-fill align-bottom me-2 text-muted"></i>{" "}
                   Delete
@@ -358,20 +420,26 @@ const InvoiceList = () => {
               <Card id="invoiceList">
                 <CardHeader className="border-0">
                   <div className="d-flex align-items-center">
-                    <h5 className="card-title mb-0 flex-grow-1 fs-17">Invoices</h5>
+                    <h5 className="card-title mb-0 flex-grow-1 fs-17">
+                      Invoices
+                    </h5>
                     <div className="flex-shrink-0">
                       <div className="d-flex gap-2 flex-wrap">
-                        {isMultiDeleteButton && <button className="btn btn-primary"
-                          onClick={() => setDeleteModalMulti(true)}
-                        ><i className="ri-delete-bin-2-line"></i></button>}
+                        {isMultiDeleteButton && (
+                          <button
+                            className="btn btn-primary"
+                            onClick={() => setDeleteModalMulti(true)}
+                          >
+                            <i className="ri-delete-bin-2-line"></i>
+                          </button>
+                        )}
                         <Link
                           to="/apps-invoices-create"
                           className="btn btn-danger"
                         >
-                          <i className="ri-add-line align-bottom me-1"></i> Create
-                          Invoice
+                          <i className="ri-add-line align-bottom me-1"></i>{" "}
+                          Create Invoice
                         </Link>
-
                       </div>
                     </div>
                   </div>
@@ -381,17 +449,18 @@ const InvoiceList = () => {
                     {isInvoiceSuccess && invoices.length ? (
                       <TableContainer
                         columns={columns}
-                        data={(invoices || [])}
+                        data={invoices || []}
                         isGlobalFilter={true}
                         isAddUserList={false}
                         customPageSize={10}
                         className="custom-header-css"
                         theadClass="text-muted text-uppercase fs-13"
                         isInvoiceListFilter={true}
-                        SearchPlaceholder='Search for customer, email, country, status or something...'
+                        SearchPlaceholder="Search for customer, email, country, status or something..."
                       />
-                    ) : (<Loader error={error} />)
-                    }
+                    ) : (
+                      <Loader error={error} />
+                    )}
                   </div>
                   <ToastContainer closeButton={false} limit={1} />
                 </CardBody>

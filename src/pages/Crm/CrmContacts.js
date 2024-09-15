@@ -25,7 +25,7 @@ import {
   Form,
   ModalFooter,
   Table,
-  FormFeedback
+  FormFeedback,
 } from "reactstrap";
 import Select from "react-select";
 
@@ -44,8 +44,7 @@ import { useSelector, useDispatch } from "react-redux";
 import TableContainer from "../../Components/Common/TableContainer";
 
 import Loader from "../../Components/Common/Loader";
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from "react-toastify";
 
 // Export Modal
 import ExportCSVModal from "../../Components/Common/ExportCSVModal";
@@ -59,18 +58,13 @@ const CrmContacts = () => {
   const dispatch = useDispatch();
 
   const selectLayoutState = (state) => state.Crm;
-  const crmcontactData = createSelector(
-    selectLayoutState,
-    (state) => ({
-      crmcontacts: state.crmcontacts,
+  const crmcontactData = createSelector(selectLayoutState, (state) => ({
+    crmcontacts: state.crmcontacts,
     isContactSuccess: state.isContactSuccess,
     error: state.error,
-    })
-  );
+  }));
   // Inside your component
-  const {
-    crmcontacts, isContactSuccess, error
-  } = useSelector(crmcontactData);
+  const { crmcontacts, isContactSuccess, error } = useSelector(crmcontactData);
 
   useEffect(() => {
     if (crmcontacts && !crmcontacts.length) {
@@ -89,10 +83,8 @@ const CrmContacts = () => {
     }
   }, [crmcontacts]);
 
-
   const [isEdit, setIsEdit] = useState(false);
   const [contact, setContact] = useState([]);
-
 
   //delete Conatct
   const [deleteModal, setDeleteModal] = useState(false);
@@ -130,13 +122,25 @@ const CrmContacts = () => {
     toggle();
   };
 
-
   // Date & Time Format
 
   const dateFormat = () => {
     var d = new Date(),
-      months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    return (d.getDate() + ' ' + months[d.getMonth()] + ', ' + d.getFullYear());
+      months = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+    return d.getDate() + " " + months[d.getMonth()] + ", " + d.getFullYear();
   };
 
   // validation
@@ -146,12 +150,12 @@ const CrmContacts = () => {
 
     initialValues: {
       // img: (contact && contact.img) || '',
-      name: (contact && contact.name) || '',
-      company: (contact && contact.company) || '',
-      designation: (contact && contact.designation) || '',
-      email: (contact && contact.email) || '',
-      phone: (contact && contact.phone) || '',
-      lead_score: (contact && contact.lead_score) || '',
+      name: (contact && contact.name) || "",
+      company: (contact && contact.company) || "",
+      designation: (contact && contact.designation) || "",
+      email: (contact && contact.email) || "",
+      phone: (contact && contact.phone) || "",
+      lead_score: (contact && contact.lead_score) || "",
       tags: (contact && contact.tags) || [],
     },
     validationSchema: Yup.object({
@@ -203,28 +207,31 @@ const CrmContacts = () => {
   });
 
   // Update Data
-  const handleContactClick = useCallback((arg) => {
-    const contact = arg;
+  const handleContactClick = useCallback(
+    (arg) => {
+      const contact = arg;
 
-    setContact({
-      _id: contact._id,
-      // img: contact.img,
-      name: contact.name,
-      company: contact.company,
-      email: contact.email,
-      designation: contact.designation,
-      phone: contact.phone,
-      lead_score: contact.lead_score,
-      last_contacted: contact.date,
-      // time: contact.time,
-      tags: contact.tags,
-    });
+      setContact({
+        _id: contact._id,
+        // img: contact.img,
+        name: contact.name,
+        company: contact.company,
+        email: contact.email,
+        designation: contact.designation,
+        phone: contact.phone,
+        lead_score: contact.lead_score,
+        last_contacted: contact.date,
+        // time: contact.time,
+        tags: contact.tags,
+      });
 
-    setIsEdit(true);
-    toggle();
-  }, [toggle]);
+      setIsEdit(true);
+      toggle();
+    },
+    [toggle]
+  );
 
-  // Node API 
+  // Node API
   // useEffect(() => {
   //   if (isContactCreated) {
   //     setContact(null);
@@ -235,7 +242,7 @@ const CrmContacts = () => {
   //   isContactCreated,
   // ]);
 
-  const handleValidDate = date => {
+  const handleValidDate = (date) => {
     const date1 = moment(new Date(date)).format("DD MMM Y");
     return date1;
   };
@@ -251,7 +258,8 @@ const CrmContacts = () => {
     } else {
       meridiem = "AM";
     }
-    const updateTime = moment(getTime, 'hh:mm').format('hh:mm') + " " + meridiem;
+    const updateTime =
+      moment(getTime, "hh:mm").format("hh:mm") + " " + meridiem;
     return updateTime;
   };
 
@@ -280,7 +288,9 @@ const CrmContacts = () => {
     const checkall = document.getElementById("checkBoxAll");
     selectedCheckBoxDelete.forEach((element) => {
       dispatch(onDeleteContact(element.value));
-      setTimeout(() => { toast.clearWaitingQueue(); }, 3000);
+      setTimeout(() => {
+        toast.clearWaitingQueue();
+      }, 3000);
     });
     setIsMultiDeleteButton(false);
     checkall.checked = false;
@@ -288,7 +298,9 @@ const CrmContacts = () => {
 
   const deleteCheckbox = () => {
     const ele = document.querySelectorAll(".contactCheckBox:checked");
-    ele.length > 0 ? setIsMultiDeleteButton(true) : setIsMultiDeleteButton(false);
+    ele.length > 0
+      ? setIsMultiDeleteButton(true)
+      : setIsMultiDeleteButton(false);
     setSelectedCheckBoxDelete(ele);
   };
 
@@ -296,11 +308,25 @@ const CrmContacts = () => {
   const columns = useMemo(
     () => [
       {
-        header: <input type="checkbox" className="form-check-input" id="checkBoxAll" onClick={() => checkedAll()} />,
+        header: (
+          <input
+            type="checkbox"
+            className="form-check-input"
+            id="checkBoxAll"
+            onClick={() => checkedAll()}
+          />
+        ),
         cell: (cell) => {
-          return <input type="checkbox" className="contactCheckBox form-check-input" value={cell.getValue()} onChange={() => deleteCheckbox()} />;
+          return (
+            <input
+              type="checkbox"
+              className="contactCheckBox form-check-input"
+              value={cell.getValue()}
+              onChange={() => deleteCheckbox()}
+            />
+          );
         },
-        id: '#',
+        id: "#",
         accessorKey: "id",
         enableColumnFilter: false,
         enableSorting: false,
@@ -313,15 +339,17 @@ const CrmContacts = () => {
           <>
             <div className="d-flex align-items-center">
               <div className="flex-shrink-0">
-             <img
-                   src={process.env.REACT_APP_API_URL + "/images/users/" + cell.row.original.image_src}
+                <img
+                  src={
+                    process.env.REACT_APP_API_URL +
+                    "/images/users/" +
+                    cell.row.original.image_src
+                  }
                   alt=""
                   className="avatar-xs rounded-circle"
                 />
               </div>
-              <div className="flex-grow-1 ms-2 name">
-                {cell.getValue()}
-              </div>
+              <div className="flex-grow-1 ms-2 name">{cell.getValue()}</div>
             </div>
           </>
         ),
@@ -352,7 +380,14 @@ const CrmContacts = () => {
         enableColumnFilter: false,
         cell: (cell) => (
           <>
-            {cell.getValue().map((item, key) => (<span className="badge bg-primary-subtle text-primary me-1" key={key}>{item}</span>))}
+            {cell.getValue().map((item, key) => (
+              <span
+                className="badge bg-primary-subtle text-primary me-1"
+                key={key}
+              >
+                {item}
+              </span>
+            ))}
           </>
         ),
       },
@@ -363,7 +398,9 @@ const CrmContacts = () => {
         cell: (cell) => (
           <>
             {handleValidDate(cell.getValue())},{" "}
-            <small className="text-muted">{handleValidTime(cell.getValue())}</small>
+            <small className="text-muted">
+              {handleValidTime(cell.getValue())}
+            </small>
           </>
         ),
       },
@@ -392,8 +429,13 @@ const CrmContacts = () => {
                     <i className="ri-more-fill align-middle"></i>
                   </DropdownToggle>
                   <DropdownMenu className="dropdown-menu-end">
-                    <DropdownItem className="dropdown-item" href="#"
-                      onClick={() => { const contactData = cellProps.row.original; setInfo(contactData); }}
+                    <DropdownItem
+                      className="dropdown-item"
+                      href="#"
+                      onClick={() => {
+                        const contactData = cellProps.row.original;
+                        setInfo(contactData);
+                      }}
                     >
                       <i className="ri-eye-fill align-bottom me-2 text-muted"></i>{" "}
                       View
@@ -401,7 +443,10 @@ const CrmContacts = () => {
                     <DropdownItem
                       className="dropdown-item edit-item-btn"
                       href="#"
-                      onClick={() => { const contactData = cellProps.row.original; handleContactClick(contactData); }}
+                      onClick={() => {
+                        const contactData = cellProps.row.original;
+                        handleContactClick(contactData);
+                      }}
                     >
                       <i className="ri-pencil-fill align-bottom me-2 text-muted"></i>{" "}
                       Edit
@@ -409,7 +454,10 @@ const CrmContacts = () => {
                     <DropdownItem
                       className="dropdown-item remove-item-btn"
                       href="#"
-                      onClick={() => { const contactData = cellProps.row.original; onClickDelete(contactData); }}
+                      onClick={() => {
+                        const contactData = cellProps.row.original;
+                        onClickDelete(contactData);
+                      }}
                     >
                       <i className="ri-delete-bin-fill align-bottom me-2 text-muted"></i>{" "}
                       Delete
@@ -438,7 +486,7 @@ const CrmContacts = () => {
     { label: "Exiting", value: "Exiting" },
     { label: "Lead", value: "Lead" },
     { label: "Long-term", value: "Long-term" },
-    { label: "Partner", value: "Partner" }
+    { label: "Partner", value: "Partner" },
   ];
 
   // SideBar Contact Deatail
@@ -489,14 +537,24 @@ const CrmContacts = () => {
                     </div>
                     <div className="flex-shrink-0">
                       <div className="hstack text-nowrap gap-2">
-                        {isMultiDeleteButton && <button className="btn btn-secondary"
-                          onClick={() => setDeleteModalMulti(true)}
-                        ><i className="ri-delete-bin-2-line"></i></button>}
+                        {isMultiDeleteButton && (
+                          <button
+                            className="btn btn-secondary"
+                            onClick={() => setDeleteModalMulti(true)}
+                          >
+                            <i className="ri-delete-bin-2-line"></i>
+                          </button>
+                        )}
                         <button className="btn btn-danger">
                           <i className="ri-filter-2-line me-1 align-bottom"></i>{" "}
                           Filters
                         </button>
-                        <button className="btn btn-soft-success" onClick={() => setIsExportCSV(true)}>Export</button>
+                        <button
+                          className="btn btn-soft-success"
+                          onClick={() => setIsExportCSV(true)}
+                        >
+                          Export
+                        </button>
 
                         <UncontrolledDropdown>
                           <DropdownToggle
@@ -507,13 +565,20 @@ const CrmContacts = () => {
                             <i className="ri-more-2-fill"></i>
                           </DropdownToggle>
                           <DropdownMenu className="dropdown-menu-end">
-                            <DropdownItem className="dropdown-item" href="#">All</DropdownItem>
-                            <DropdownItem className="dropdown-item" href="#">Last Week</DropdownItem>
-                            <DropdownItem className="dropdown-item" href="#">Last Month</DropdownItem>
-                            <DropdownItem className="dropdown-item" href="#">Last Year</DropdownItem>
+                            <DropdownItem className="dropdown-item" href="#">
+                              All
+                            </DropdownItem>
+                            <DropdownItem className="dropdown-item" href="#">
+                              Last Week
+                            </DropdownItem>
+                            <DropdownItem className="dropdown-item" href="#">
+                              Last Month
+                            </DropdownItem>
+                            <DropdownItem className="dropdown-item" href="#">
+                              Last Year
+                            </DropdownItem>
                           </DropdownMenu>
                         </UncontrolledDropdown>
-
                       </div>
                     </div>
                   </div>
@@ -527,7 +592,7 @@ const CrmContacts = () => {
                     {isContactSuccess && crmcontacts.length ? (
                       <TableContainer
                         columns={columns}
-                        data={(crmcontacts || [])}
+                        data={crmcontacts || []}
                         isGlobalFilter={true}
                         isAddUserList={false}
                         customPageSize={8}
@@ -537,10 +602,11 @@ const CrmContacts = () => {
                         theadClass="table-light"
                         handleContactClick={handleContactClicks}
                         isContactsFilter={true}
-                        SearchPlaceholder='Search for contact...'
+                        SearchPlaceholder="Search for contact..."
                       />
-                    ) : (<Loader error={error} />)
-                    }
+                    ) : (
+                      <Loader error={error} />
+                    )}
                   </div>
 
                   <Modal id="showModal" isOpen={modal} toggle={toggle} centered>
@@ -548,11 +614,14 @@ const CrmContacts = () => {
                       {!!isEdit ? "Edit Contact" : "Add Contact"}
                     </ModalHeader>
 
-                    <Form className="tablelist-form" onSubmit={(e) => {
-                      e.preventDefault();
-                      validation.handleSubmit();
-                      return false;
-                    }}>
+                    <Form
+                      className="tablelist-form"
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        validation.handleSubmit();
+                        return false;
+                      }}
+                    >
                       <ModalBody>
                         <Input type="hidden" id="id-field" />
                         <Row className="g-3">
@@ -560,26 +629,40 @@ const CrmContacts = () => {
                             <div className="text-center">
                               <div className="position-relative d-inline-block">
                                 <div className="position-absolute  bottom-0 end-0">
-                                  <Label htmlFor="customer-image-input" className="mb-0">
+                                  <Label
+                                    htmlFor="customer-image-input"
+                                    className="mb-0"
+                                  >
                                     <div className="avatar-xs cursor-pointer">
                                       <div className="avatar-title bg-light border rounded-circle text-muted">
                                         <i className="ri-image-fill"></i>
                                       </div>
                                     </div>
                                   </Label>
-                                  <Input className="form-control d-none" id="customer-image-input" type="file"
+                                  <Input
+                                    className="form-control d-none"
+                                    id="customer-image-input"
+                                    type="file"
                                     accept="image/png, image/gif, image/jpeg"
                                     onChange={validation.handleChange}
                                     onBlur={validation.handleBlur}
                                     value={validation.values.img || ""}
                                     invalid={
-                                      validation.touched.img && validation.errors.img ? true : false
+                                      validation.touched.img &&
+                                      validation.errors.img
+                                        ? true
+                                        : false
                                     }
                                   />
                                 </div>
                                 <div className="avatar-lg p-1">
                                   <div className="avatar-title bg-light rounded-circle">
-                                    <img src={dummyImg} alt="dummyImg" id="customer-img" className="avatar-md rounded-circle object-fit-cover" />
+                                    <img
+                                      src={dummyImg}
+                                      alt="dummyImg"
+                                      id="customer-img"
+                                      className="avatar-md rounded-circle object-fit-cover"
+                                    />
                                   </div>
                                 </div>
                               </div>
@@ -605,13 +688,18 @@ const CrmContacts = () => {
                                 onBlur={validation.handleBlur}
                                 value={validation.values.name || ""}
                                 invalid={
-                                  validation.touched.name && validation.errors.name ? true : false
+                                  validation.touched.name &&
+                                  validation.errors.name
+                                    ? true
+                                    : false
                                 }
                               />
-                              {validation.touched.name && validation.errors.name ? (
-                                <FormFeedback type="invalid">{validation.errors.name}</FormFeedback>
+                              {validation.touched.name &&
+                              validation.errors.name ? (
+                                <FormFeedback type="invalid">
+                                  {validation.errors.name}
+                                </FormFeedback>
                               ) : null}
-
                             </div>
                           </Col>
                           <Col lg={12}>
@@ -635,13 +723,18 @@ const CrmContacts = () => {
                                 onBlur={validation.handleBlur}
                                 value={validation.values.company || ""}
                                 invalid={
-                                  validation.touched.company && validation.errors.company ? true : false
+                                  validation.touched.company &&
+                                  validation.errors.company
+                                    ? true
+                                    : false
                                 }
                               />
-                              {validation.touched.company && validation.errors.company ? (
-                                <FormFeedback type="invalid">{validation.errors.company}</FormFeedback>
+                              {validation.touched.company &&
+                              validation.errors.company ? (
+                                <FormFeedback type="invalid">
+                                  {validation.errors.company}
+                                </FormFeedback>
                               ) : null}
-
                             </div>
                           </Col>
 
@@ -667,13 +760,18 @@ const CrmContacts = () => {
                                 onBlur={validation.handleBlur}
                                 value={validation.values.designation || ""}
                                 invalid={
-                                  validation.touched.designation && validation.errors.designation ? true : false
+                                  validation.touched.designation &&
+                                  validation.errors.designation
+                                    ? true
+                                    : false
                                 }
                               />
-                              {validation.touched.designation && validation.errors.designation ? (
-                                <FormFeedback type="invalid">{validation.errors.designation}</FormFeedback>
+                              {validation.touched.designation &&
+                              validation.errors.designation ? (
+                                <FormFeedback type="invalid">
+                                  {validation.errors.designation}
+                                </FormFeedback>
                               ) : null}
-
                             </div>
                           </Col>
 
@@ -699,13 +797,18 @@ const CrmContacts = () => {
                                 onBlur={validation.handleBlur}
                                 value={validation.values.email || ""}
                                 invalid={
-                                  validation.touched.email && validation.errors.email ? true : false
+                                  validation.touched.email &&
+                                  validation.errors.email
+                                    ? true
+                                    : false
                                 }
                               />
-                              {validation.touched.email && validation.errors.email ? (
-                                <FormFeedback type="invalid">{validation.errors.email}</FormFeedback>
+                              {validation.touched.email &&
+                              validation.errors.email ? (
+                                <FormFeedback type="invalid">
+                                  {validation.errors.email}
+                                </FormFeedback>
                               ) : null}
-
                             </div>
                           </Col>
                           <Col lg={6}>
@@ -730,11 +833,17 @@ const CrmContacts = () => {
                                 onBlur={validation.handleBlur}
                                 value={validation.values.phone || ""}
                                 invalid={
-                                  validation.touched.phone && validation.errors.phone ? true : false
+                                  validation.touched.phone &&
+                                  validation.errors.phone
+                                    ? true
+                                    : false
                                 }
                               />
-                              {validation.touched.phone && validation.errors.phone ? (
-                                <FormFeedback type="invalid">{validation.errors.phone}</FormFeedback>
+                              {validation.touched.phone &&
+                              validation.errors.phone ? (
+                                <FormFeedback type="invalid">
+                                  {validation.errors.phone}
+                                </FormFeedback>
                               ) : null}
                             </div>
                           </Col>
@@ -760,11 +869,17 @@ const CrmContacts = () => {
                                 onBlur={validation.handleBlur}
                                 value={validation.values.lead_score || ""}
                                 invalid={
-                                  validation.touched.lead_score && validation.errors.lead_score ? true : false
+                                  validation.touched.lead_score &&
+                                  validation.errors.lead_score
+                                    ? true
+                                    : false
                                 }
                               />
-                              {validation.touched.lead_score && validation.errors.lead_score ? (
-                                <FormFeedback type="invalid">{validation.errors.lead_score}</FormFeedback>
+                              {validation.touched.lead_score &&
+                              validation.errors.lead_score ? (
+                                <FormFeedback type="invalid">
+                                  {validation.errors.lead_score}
+                                </FormFeedback>
                               ) : null}
                             </div>
                           </Col>
@@ -785,11 +900,10 @@ const CrmContacts = () => {
                                 className="mb-0"
                                 options={tags}
                                 id="taginput-choices"
-                              >
-                              </Select>
+                              ></Select>
 
                               {validation.touched.tags &&
-                                validation.errors.tags ? (
+                              validation.errors.tags ? (
                                 <FormFeedback type="invalid">
                                   {validation.errors.tags}
                                 </FormFeedback>
@@ -800,8 +914,24 @@ const CrmContacts = () => {
                       </ModalBody>
                       <ModalFooter>
                         <div className="hstack gap-2 justify-content-end">
-                          <button type="button" className="btn btn-light" onClick={() => { setModal(false); }} > Close </button>
-                          <button type="submit" className="btn btn-success" id="add-btn" > {!!isEdit ? "Update" : "Add Contact"} </button>
+                          <button
+                            type="button"
+                            className="btn btn-light"
+                            onClick={() => {
+                              setModal(false);
+                            }}
+                          >
+                            {" "}
+                            Close{" "}
+                          </button>
+                          <button
+                            type="submit"
+                            className="btn btn-success"
+                            id="add-btn"
+                          >
+                            {" "}
+                            {!!isEdit ? "Update" : "Add Contact"}{" "}
+                          </button>
                         </div>
                       </ModalFooter>
                     </Form>
@@ -816,7 +946,11 @@ const CrmContacts = () => {
                 <CardBody className="text-center">
                   <div className="position-relative d-inline-block">
                     <img
-                      src={process.env.REACT_APP_API_URL + "/images/users/" + (info.image_src || "avatar-10.jpg")}
+                      src={
+                        process.env.REACT_APP_API_URL +
+                        "/images/users/" +
+                        (info.image_src || "avatar-10.jpg")
+                      }
                       alt=""
                       className="avatar-lg rounded-circle img-thumbnail"
                     />
@@ -825,7 +959,9 @@ const CrmContacts = () => {
                     </span>
                   </div>
                   <h5 className="mt-4 mb-1">{info.name || "Tonya Noble"}</h5>
-                  <p className="text-muted">{info.company || "Nesta Technologies"}</p>
+                  <p className="text-muted">
+                    {info.company || "Nesta Technologies"}
+                  </p>
 
                   <ul className="list-inline mb-0">
                     <li className="list-inline-item avatar-xs">
@@ -859,53 +995,57 @@ const CrmContacts = () => {
                     Personal Information
                   </h6>
                   <p className="text-muted mb-4">
-                    Hello, I'm {info.name || "Tonya Noble"}, The most effective objective is one
-                    that is tailored to the job you are applying for. It states
-                    what kind of career you are seeking, and what skills and
-                    experiences.
+                    Hello, I'm {info.name || "Tonya Noble"}, The most effective
+                    objective is one that is tailored to the job you are
+                    applying for. It states what kind of career you are seeking,
+                    and what skills and experiences.
                   </p>
                   <div className="table-responsive table-card">
                     <Table className="table table-borderless mb-0">
                       <tbody>
                         <tr>
-                          <td className="fw-medium">
-                            Designation
-                          </td>
+                          <td className="fw-medium">Designation</td>
                           <td>Lead Designer / Developer</td>
                         </tr>
                         <tr>
-                          <td className="fw-medium">
-                            Email ID
-                          </td>
+                          <td className="fw-medium">Email ID</td>
                           <td>{info.email || "tonyanoble@velzon.com"}</td>
                         </tr>
                         <tr>
-                          <td className="fw-medium">
-                            Phone No
-                          </td>
+                          <td className="fw-medium">Phone No</td>
                           <td>{info.phone || "414-453-5725"}</td>
                         </tr>
                         <tr>
-                          <td className="fw-medium">
-                            Lead Score
-                          </td>
+                          <td className="fw-medium">Lead Score</td>
                           <td>{info.lead_score || "154"}</td>
                         </tr>
                         <tr>
-                          <td className="fw-medium">
-                            Tags
-                          </td>
+                          <td className="fw-medium">Tags</td>
                           <td>
-                            {(info.tags || ["Lead", "Partner"]).map((item, key) => (<span className="badge bg-primary-subtle text-primary me-1" key={key}>{item}</span>))}
+                            {(info.tags || ["Lead", "Partner"]).map(
+                              (item, key) => (
+                                <span
+                                  className="badge bg-primary-subtle text-primary me-1"
+                                  key={key}
+                                >
+                                  {item}
+                                </span>
+                              )
+                            )}
                           </td>
                         </tr>
                         <tr>
-                          <td className="fw-medium">
-                            Last Contacted
-                          </td>
+                          <td className="fw-medium">Last Contacted</td>
                           <td>
-                            {handleValidDate(info.last_contacted || "2021-04-13T18:30:00.000Z")}{" "}
-                            <small className="text-muted">{handleValidTime(info.last_contacted || "2021-04-13T18:30:00.000Z")}</small>
+                            {handleValidDate(
+                              info.last_contacted || "2021-04-13T18:30:00.000Z"
+                            )}{" "}
+                            <small className="text-muted">
+                              {handleValidTime(
+                                info.last_contacted ||
+                                  "2021-04-13T18:30:00.000Z"
+                              )}
+                            </small>
                           </td>
                         </tr>
                       </tbody>

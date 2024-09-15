@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { Link } from "react-router-dom";
 
 // Import Images
-import multiUser from '../../assets/images/users/multi-user.jpg';
+import multiUser from "../../assets/images/users/multi-user.jpg";
 
 import {
   Col,
@@ -23,7 +23,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  FormFeedback
+  FormFeedback,
 } from "reactstrap";
 import BreadCrumb from "../../Components/Common/BreadCrumb";
 import DeleteModal from "../../Components/Common/DeleteModal";
@@ -41,8 +41,7 @@ import { useSelector, useDispatch } from "react-redux";
 import TableContainer from "../../Components/Common/TableContainer";
 
 import Loader from "../../Components/Common/Loader";
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from "react-toastify";
 
 // Export Modal
 import ExportCSVModal from "../../Components/Common/ExportCSVModal";
@@ -56,19 +55,14 @@ const CrmCompanies = () => {
   const dispatch = useDispatch();
 
   const selectLayoutState = (state) => state.Crm;
-  const crmcompaniesData = createSelector(
-    selectLayoutState,
-    (state) => ({
-      companies: state.companies,
-      isCompaniesSuccess: state.isCompaniesSuccess,
-      error: state.error,
-    })
-  );
+  const crmcompaniesData = createSelector(selectLayoutState, (state) => ({
+    companies: state.companies,
+    isCompaniesSuccess: state.isCompaniesSuccess,
+    error: state.error,
+  }));
   // Inside your component
-  const {
-    companies, isCompaniesSuccess, error
-  } = useSelector(crmcompaniesData);
-
+  const { companies, isCompaniesSuccess, error } =
+    useSelector(crmcompaniesData);
 
   useEffect(() => {
     if (companies && !companies.length) {
@@ -86,7 +80,6 @@ const CrmCompanies = () => {
       setIsEdit(false);
     }
   }, [companies]);
-
 
   const [isEdit, setIsEdit] = useState(false);
   const [company, setCompany] = useState([]);
@@ -151,15 +144,15 @@ const CrmCompanies = () => {
 
     initialValues: {
       // img: (company && company.img) || '',
-      name: (company && company.name) || '',
-      owner: (company && company.owner) || '',
-      industry_type: (company && company.industry_type) || '',
-      star_value: (company && company.star_value) || '',
-      location: (company && company.location) || '',
-      employee: (company && company.employee) || '',
-      website: (company && company.website) || '',
-      contact_email: (company && company.contact_email) || '',
-      since: (company && company.since) || '',
+      name: (company && company.name) || "",
+      owner: (company && company.owner) || "",
+      industry_type: (company && company.industry_type) || "",
+      star_value: (company && company.star_value) || "",
+      location: (company && company.location) || "",
+      employee: (company && company.employee) || "",
+      website: (company && company.website) || "",
+      contact_email: (company && company.contact_email) || "",
+      since: (company && company.since) || "",
     },
     validationSchema: Yup.object({
       name: Yup.string().required("Please Enter Company Name"),
@@ -202,7 +195,7 @@ const CrmCompanies = () => {
           employee: values["employee"],
           website: values["website"],
           contact_email: values["contact_email"],
-          since: values["since"]
+          since: values["since"],
         };
         // save new Company
         dispatch(onAddNewCompanies(newCompany));
@@ -213,28 +206,31 @@ const CrmCompanies = () => {
   });
 
   // Update Data
-  const handleCompanyClick = useCallback((arg) => {
-    const company = arg;
+  const handleCompanyClick = useCallback(
+    (arg) => {
+      const company = arg;
 
-    setCompany({
-      _id: company._id,
-      // img: company.img,
-      name: company.name,
-      owner: company.owner,
-      industry_type: company.industry_type,
-      star_value: company.star_value,
-      location: company.location,
-      employee: company.employee,
-      website: company.website,
-      contact_email: company.contact_email,
-      since: company.since
-    });
+      setCompany({
+        _id: company._id,
+        // img: company.img,
+        name: company.name,
+        owner: company.owner,
+        industry_type: company.industry_type,
+        star_value: company.star_value,
+        location: company.location,
+        employee: company.employee,
+        website: company.website,
+        contact_email: company.contact_email,
+        since: company.since,
+      });
 
-    setIsEdit(true);
-    toggle();
-  }, [toggle]);
+      setIsEdit(true);
+      toggle();
+    },
+    [toggle]
+  );
 
-  // Node API 
+  // Node API
   // useEffect(() => {
   //   if (isCompaniesCreated) {
   //     setCompany(null);
@@ -270,7 +266,9 @@ const CrmCompanies = () => {
     const checkall = document.getElementById("checkBoxAll");
     selectedCheckBoxDelete.forEach((element) => {
       dispatch(onDeleteCompanies(element.value));
-      setTimeout(() => { toast.clearWaitingQueue(); }, 3000);
+      setTimeout(() => {
+        toast.clearWaitingQueue();
+      }, 3000);
     });
     setIsMultiDeleteButton(false);
     checkall.checked = false;
@@ -278,7 +276,9 @@ const CrmCompanies = () => {
 
   const deleteCheckbox = () => {
     const ele = document.querySelectorAll(".companyCheckBox:checked");
-    ele.length > 0 ? setIsMultiDeleteButton(true) : setIsMultiDeleteButton(false);
+    ele.length > 0
+      ? setIsMultiDeleteButton(true)
+      : setIsMultiDeleteButton(false);
     setSelectedCheckBoxDelete(ele);
   };
 
@@ -286,11 +286,25 @@ const CrmCompanies = () => {
   const columns = useMemo(
     () => [
       {
-        header: <input type="checkbox" className="form-check-input" id="checkBoxAll" onClick={() => checkedAll()} />,
+        header: (
+          <input
+            type="checkbox"
+            className="form-check-input"
+            id="checkBoxAll"
+            onClick={() => checkedAll()}
+          />
+        ),
         cell: (cell) => {
-          return <input type="checkbox" className="companyCheckBox form-check-input" value={cell.getValue()} onChange={() => deleteCheckbox()} />;
+          return (
+            <input
+              type="checkbox"
+              className="companyCheckBox form-check-input"
+              value={cell.getValue()}
+              onChange={() => deleteCheckbox()}
+            />
+          );
         },
-        id: '#',
+        id: "#",
         accessorKey: "id",
         enableColumnFilter: false,
         enableSorting: false,
@@ -303,21 +317,25 @@ const CrmCompanies = () => {
           <>
             <div className="d-flex align-items-center">
               <div className="flex-shrink-0">
-                {cell.row.original.image_src ? <img
-                  src={process.env.REACT_APP_API_URL + "/images/" + cell.row.original.image_src}
-                  alt=""
-                  className="avatar-xxs rounded-circle"
-                /> :
+                {cell.row.original.image_src ? (
+                  <img
+                    src={
+                      process.env.REACT_APP_API_URL +
+                      "/images/" +
+                      cell.row.original.image_src
+                    }
+                    alt=""
+                    className="avatar-xxs rounded-circle"
+                  />
+                ) : (
                   <div className="flex-shrink-0 avatar-xs me-2">
                     <div className="avatar-title bg-success-subtle text-success rounded-circle fs-13">
                       {cell.getValue().charAt(0)}
                     </div>
                   </div>
-                }
+                )}
               </div>
-              <div className="flex-grow-1 ms-2 name">
-                {cell.getValue()}
-              </div>
+              <div className="flex-grow-1 ms-2 name">{cell.getValue()}</div>
             </div>
           </>
         ),
@@ -338,7 +356,8 @@ const CrmCompanies = () => {
         enableColumnFilter: false,
         cell: (cell) => (
           <>
-            {cell.getValue()}{" "}<i className="ri-star-fill text-warning align-bottom"></i>
+            {cell.getValue()}{" "}
+            <i className="ri-star-fill text-warning align-bottom"></i>
           </>
         ),
       },
@@ -363,15 +382,24 @@ const CrmCompanies = () => {
                 </Link>
               </li>
               <li className="list-inline-item" title="View">
-                <Link to="#"
-                  onClick={() => { const companyData = cell.row.original; setInfo(companyData); }}
+                <Link
+                  to="#"
+                  onClick={() => {
+                    const companyData = cell.row.original;
+                    setInfo(companyData);
+                  }}
                 >
                   <i className="ri-eye-fill align-bottom text-muted"></i>
                 </Link>
               </li>
               <li className="list-inline-item" title="Edit">
-                <Link className="edit-item-btn" to="#"
-                  onClick={() => { const companyData = cell.row.original; handleCompanyClick(companyData); }}
+                <Link
+                  className="edit-item-btn"
+                  to="#"
+                  onClick={() => {
+                    const companyData = cell.row.original;
+                    handleCompanyClick(companyData);
+                  }}
                 >
                   <i className="ri-pencil-fill align-bottom text-muted"></i>
                 </Link>
@@ -379,7 +407,10 @@ const CrmCompanies = () => {
               <li className="list-inline-item" title="Delete">
                 <Link
                   className="remove-item-btn"
-                  onClick={() => { const companyData = cell.row.original; onClickDelete(companyData); }}
+                  onClick={() => {
+                    const companyData = cell.row.original;
+                    onClickDelete(companyData);
+                  }}
                   to="#"
                 >
                   <i className="ri-delete-bin-fill align-bottom text-muted"></i>
@@ -430,20 +461,37 @@ const CrmCompanies = () => {
                 <CardHeader>
                   <div className="d-flex align-items-center flex-wrap gap-2">
                     <div className="flex-grow-1">
-                      <button className="btn btn-info add-btn" onClick={() => { setIsEdit(false); toggle(); }}>
-                        <i className="ri-add-fill me-1 align-bottom"></i> Add Company
+                      <button
+                        className="btn btn-info add-btn"
+                        onClick={() => {
+                          setIsEdit(false);
+                          toggle();
+                        }}
+                      >
+                        <i className="ri-add-fill me-1 align-bottom"></i> Add
+                        Company
                       </button>
                     </div>
                     <div className="flex-shrink-0">
                       <div className="hstack text-nowrap gap-2">
-                        {isMultiDeleteButton && <button className="btn btn-secondary"
-                          onClick={() => setDeleteModalMulti(true)}
-                        ><i className="ri-delete-bin-2-line"></i></button>}
+                        {isMultiDeleteButton && (
+                          <button
+                            className="btn btn-secondary"
+                            onClick={() => setDeleteModalMulti(true)}
+                          >
+                            <i className="ri-delete-bin-2-line"></i>
+                          </button>
+                        )}
                         <button className="btn btn-danger">
                           <i className="ri-filter-2-line me-1 align-bottom"></i>{" "}
                           Filters
                         </button>
-                        <button className="btn btn-soft-success" onClick={() => setIsExportCSV(true)}>Import</button>
+                        <button
+                          className="btn btn-soft-success"
+                          onClick={() => setIsExportCSV(true)}
+                        >
+                          Import
+                        </button>
                         <UncontrolledDropdown>
                           <DropdownToggle
                             href="#"
@@ -480,7 +528,7 @@ const CrmCompanies = () => {
                     {isCompaniesSuccess && companies.length ? (
                       <TableContainer
                         columns={columns}
-                        data={(companies || [])}
+                        data={companies || []}
                         isGlobalFilter={true}
                         isAddUserList={false}
                         customPageSize={7}
@@ -490,21 +538,30 @@ const CrmCompanies = () => {
                         theadClass="table-light"
                         handleCompanyClick={handleCompanyClicks}
                         isCompaniesFilter={true}
-                        SearchPlaceholder='Search for company...'
+                        SearchPlaceholder="Search for company..."
                       />
-                    ) : (<Loader error={error} />)
-                    }
-
+                    ) : (
+                      <Loader error={error} />
+                    )}
                   </div>
-                  <Modal id="showModal" isOpen={modal} toggle={toggle} centered size="lg">
+                  <Modal
+                    id="showModal"
+                    isOpen={modal}
+                    toggle={toggle}
+                    centered
+                    size="lg"
+                  >
                     <ModalHeader className="bg-info-subtle p-3" toggle={toggle}>
                       {!!isEdit ? "Edit Company" : "Add Company"}
                     </ModalHeader>
-                    <Form className="tablelist-form" onSubmit={(e) => {
-                      e.preventDefault();
-                      validation.handleSubmit();
-                      return false;
-                    }}>
+                    <Form
+                      className="tablelist-form"
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        validation.handleSubmit();
+                        return false;
+                      }}
+                    >
                       <ModalBody>
                         <input type="hidden" id="id-field" />
                         <Row className="g-3">
@@ -512,26 +569,41 @@ const CrmCompanies = () => {
                             <div className="text-center">
                               <div className="position-relative d-inline-block">
                                 <div className="position-absolute bottom-0 end-0">
-                                  <Label htmlFor="company-logo-input" className="mb-0">
+                                  <Label
+                                    htmlFor="company-logo-input"
+                                    className="mb-0"
+                                  >
                                     <div className="avatar-xs cursor-pointer">
                                       <div className="avatar-title bg-light border rounded-circle text-muted">
                                         <i className="ri-image-fill"></i>
                                       </div>
                                     </div>
                                   </Label>
-                                  <Input name="img" className="form-control d-none" id="company-logo-input" type="file"
+                                  <Input
+                                    name="img"
+                                    className="form-control d-none"
+                                    id="company-logo-input"
+                                    type="file"
                                     accept="image/png, image/gif, image/jpeg"
                                     onChange={validation.handleChange}
                                     onBlur={validation.handleBlur}
                                     value={validation.values.img || ""}
                                     invalid={
-                                      validation.touched.img && validation.errors.img ? true : false
+                                      validation.touched.img &&
+                                      validation.errors.img
+                                        ? true
+                                        : false
                                     }
                                   />
                                 </div>
                                 <div className="avatar-lg p-1">
                                   <div className="avatar-title bg-light rounded-circle">
-                                    <img src={multiUser} alt="multiUser" id="companylogo-img" className="avatar-md rounded-circle object-fit-cover" />
+                                    <img
+                                      src={multiUser}
+                                      alt="multiUser"
+                                      id="companylogo-img"
+                                      className="avatar-md rounded-circle object-fit-cover"
+                                    />
                                   </div>
                                 </div>
                               </div>
@@ -561,11 +633,17 @@ const CrmCompanies = () => {
                                 onBlur={validation.handleBlur}
                                 value={validation.values.name || ""}
                                 invalid={
-                                  validation.touched.name && validation.errors.name ? true : false
+                                  validation.touched.name &&
+                                  validation.errors.name
+                                    ? true
+                                    : false
                                 }
                               />
-                              {validation.touched.name && validation.errors.name ? (
-                                <FormFeedback type="invalid">{validation.errors.name}</FormFeedback>
+                              {validation.touched.name &&
+                              validation.errors.name ? (
+                                <FormFeedback type="invalid">
+                                  {validation.errors.name}
+                                </FormFeedback>
                               ) : null}
                             </div>
                           </Col>
@@ -590,11 +668,17 @@ const CrmCompanies = () => {
                                 onBlur={validation.handleBlur}
                                 value={validation.values.owner || ""}
                                 invalid={
-                                  validation.touched.owner && validation.errors.owner ? true : false
+                                  validation.touched.owner &&
+                                  validation.errors.owner
+                                    ? true
+                                    : false
                                 }
                               />
-                              {validation.touched.owner && validation.errors.owner ? (
-                                <FormFeedback type="invalid">{validation.errors.owner}</FormFeedback>
+                              {validation.touched.owner &&
+                              validation.errors.owner ? (
+                                <FormFeedback type="invalid">
+                                  {validation.errors.owner}
+                                </FormFeedback>
                               ) : null}
                             </div>
                           </Col>
@@ -614,18 +698,20 @@ const CrmCompanies = () => {
                                 id="industry_type-field"
                                 onChange={validation.handleChange}
                                 onBlur={validation.handleBlur}
-                                value={
-                                  validation.values.industry_type || ""
-                                }
+                                value={validation.values.industry_type || ""}
                               >
                                 {industrytype.map((item, key) => (
                                   <React.Fragment key={key}>
-                                    {item.options.map((item, key) => (<option value={item.value} key={key}>{item.label}</option>))}
+                                    {item.options.map((item, key) => (
+                                      <option value={item.value} key={key}>
+                                        {item.label}
+                                      </option>
+                                    ))}
                                   </React.Fragment>
                                 ))}
                               </Input>
                               {validation.touched.industry_type &&
-                                validation.errors.industry_type ? (
+                              validation.errors.industry_type ? (
                                 <FormFeedback type="invalid">
                                   {validation.errors.industry_type}
                                 </FormFeedback>
@@ -653,11 +739,17 @@ const CrmCompanies = () => {
                                 onBlur={validation.handleBlur}
                                 value={validation.values.star_value || ""}
                                 invalid={
-                                  validation.touched.star_value && validation.errors.star_value ? true : false
+                                  validation.touched.star_value &&
+                                  validation.errors.star_value
+                                    ? true
+                                    : false
                                 }
                               />
-                              {validation.touched.star_value && validation.errors.star_value ? (
-                                <FormFeedback type="invalid">{validation.errors.star_value}</FormFeedback>
+                              {validation.touched.star_value &&
+                              validation.errors.star_value ? (
+                                <FormFeedback type="invalid">
+                                  {validation.errors.star_value}
+                                </FormFeedback>
                               ) : null}
                             </div>
                           </Col>
@@ -682,13 +774,18 @@ const CrmCompanies = () => {
                                 onBlur={validation.handleBlur}
                                 value={validation.values.location || ""}
                                 invalid={
-                                  validation.touched.location && validation.errors.location ? true : false
+                                  validation.touched.location &&
+                                  validation.errors.location
+                                    ? true
+                                    : false
                                 }
                               />
-                              {validation.touched.location && validation.errors.location ? (
-                                <FormFeedback type="invalid">{validation.errors.location}</FormFeedback>
+                              {validation.touched.location &&
+                              validation.errors.location ? (
+                                <FormFeedback type="invalid">
+                                  {validation.errors.location}
+                                </FormFeedback>
                               ) : null}
-
                             </div>
                           </Col>
                           <Col lg={4}>
@@ -712,11 +809,17 @@ const CrmCompanies = () => {
                                 onBlur={validation.handleBlur}
                                 value={validation.values.employee || ""}
                                 invalid={
-                                  validation.touched.employee && validation.errors.employee ? true : false
+                                  validation.touched.employee &&
+                                  validation.errors.employee
+                                    ? true
+                                    : false
                                 }
                               />
-                              {validation.touched.employee && validation.errors.employee ? (
-                                <FormFeedback type="invalid">{validation.errors.employee}</FormFeedback>
+                              {validation.touched.employee &&
+                              validation.errors.employee ? (
+                                <FormFeedback type="invalid">
+                                  {validation.errors.employee}
+                                </FormFeedback>
                               ) : null}
                             </div>
                           </Col>
@@ -741,11 +844,17 @@ const CrmCompanies = () => {
                                 onBlur={validation.handleBlur}
                                 value={validation.values.website || ""}
                                 invalid={
-                                  validation.touched.website && validation.errors.website ? true : false
+                                  validation.touched.website &&
+                                  validation.errors.website
+                                    ? true
+                                    : false
                                 }
                               />
-                              {validation.touched.website && validation.errors.website ? (
-                                <FormFeedback type="invalid">{validation.errors.website}</FormFeedback>
+                              {validation.touched.website &&
+                              validation.errors.website ? (
+                                <FormFeedback type="invalid">
+                                  {validation.errors.website}
+                                </FormFeedback>
                               ) : null}
                             </div>
                           </Col>
@@ -770,11 +879,17 @@ const CrmCompanies = () => {
                                 onBlur={validation.handleBlur}
                                 value={validation.values.contact_email || ""}
                                 invalid={
-                                  validation.touched.contact_email && validation.errors.contact_email ? true : false
+                                  validation.touched.contact_email &&
+                                  validation.errors.contact_email
+                                    ? true
+                                    : false
                                 }
                               />
-                              {validation.touched.contact_email && validation.errors.contact_email ? (
-                                <FormFeedback type="invalid">{validation.errors.contact_email}</FormFeedback>
+                              {validation.touched.contact_email &&
+                              validation.errors.contact_email ? (
+                                <FormFeedback type="invalid">
+                                  {validation.errors.contact_email}
+                                </FormFeedback>
                               ) : null}
                             </div>
                           </Col>
@@ -799,11 +914,17 @@ const CrmCompanies = () => {
                                 onBlur={validation.handleBlur}
                                 value={validation.values.since || ""}
                                 invalid={
-                                  validation.touched.since && validation.errors.since ? true : false
+                                  validation.touched.since &&
+                                  validation.errors.since
+                                    ? true
+                                    : false
                                 }
                               />
-                              {validation.touched.since && validation.errors.since ? (
-                                <FormFeedback type="invalid">{validation.errors.since}</FormFeedback>
+                              {validation.touched.since &&
+                              validation.errors.since ? (
+                                <FormFeedback type="invalid">
+                                  {validation.errors.since}
+                                </FormFeedback>
                               ) : null}
                             </div>
                           </Col>
@@ -811,8 +932,19 @@ const CrmCompanies = () => {
                       </ModalBody>
                       <ModalFooter>
                         <div className="hstack gap-2 justify-content-end">
-                          <Button color="light" onClick={() => { setModal(false); }} > Close </Button>
-                          <Button type="submit" color="success" id="add-btn" >  {!!isEdit ? "Update" : "Add Company"} </Button>
+                          <Button
+                            color="light"
+                            onClick={() => {
+                              setModal(false);
+                            }}
+                          >
+                            {" "}
+                            Close{" "}
+                          </Button>
+                          <Button type="submit" color="success" id="add-btn">
+                            {" "}
+                            {!!isEdit ? "Update" : "Add Company"}{" "}
+                          </Button>
                         </div>
                       </ModalFooter>
                     </Form>
@@ -827,11 +959,21 @@ const CrmCompanies = () => {
                   <div className="position-relative d-inline-block">
                     <div className="avatar-md">
                       <div className="avatar-title bg-light rounded-circle">
-                        <img src={process.env.REACT_APP_API_URL + "/images/" + (info.image_src || "brands/mail_chimp.png")} alt="" className="avatar-sm rounded-circle object-fit-cover" />
+                        <img
+                          src={
+                            process.env.REACT_APP_API_URL +
+                            "/images/" +
+                            (info.image_src || "brands/mail_chimp.png")
+                          }
+                          alt=""
+                          className="avatar-sm rounded-circle object-fit-cover"
+                        />
                       </div>
                     </div>
                   </div>
-                  <h5 className="mt-3 mb-1">{info.name || "Syntyce Solution"}</h5>
+                  <h5 className="mt-3 mb-1">
+                    {info.name || "Syntyce Solution"}
+                  </h5>
                   <p className="text-muted">{info.owner || "Michael Morris"}</p>
 
                   <ul className="list-inline mb-0">
@@ -875,36 +1017,26 @@ const CrmCompanies = () => {
                     <table className="table table-borderless mb-0">
                       <tbody>
                         <tr>
-                          <td className="fw-medium">
-                            Industry Type
-                          </td>
+                          <td className="fw-medium">Industry Type</td>
                           <td>{info.industry_type || "Chemical Industries"}</td>
                         </tr>
                         <tr>
-                          <td className="fw-medium">
-                            Location
-                          </td>
+                          <td className="fw-medium">Location</td>
                           <td>{info.location || "Damascus, Syria"}</td>
                         </tr>
                         <tr>
-                          <td className="fw-medium">
-                            Employee
-                          </td>
+                          <td className="fw-medium">Employee</td>
                           <td>{info.employee || "10-50"}</td>
                         </tr>
                         <tr>
-                          <td className="fw-medium">
-                            Rating
-                          </td>
+                          <td className="fw-medium">Rating</td>
                           <td>
                             {info.star_value || "4.0"}{" "}
                             <i className="ri-star-fill text-warning align-bottom"></i>
                           </td>
                         </tr>
                         <tr>
-                          <td className="fw-medium">
-                            Website
-                          </td>
+                          <td className="fw-medium">Website</td>
                           <td>
                             <Link
                               to="#"
@@ -915,15 +1047,13 @@ const CrmCompanies = () => {
                           </td>
                         </tr>
                         <tr>
-                          <td className="fw-medium">
-                            Contact Email
+                          <td className="fw-medium">Contact Email</td>
+                          <td>
+                            {info.contact_email || "info@syntycesolution.com"}
                           </td>
-                          <td>{info.contact_email || "info@syntycesolution.com"}</td>
                         </tr>
                         <tr>
-                          <td className="fw-medium">
-                            Since
-                          </td>
+                          <td className="fw-medium">Since</td>
                           <td>{info.since || "1995"}</td>
                         </tr>
                       </tbody>
