@@ -5,9 +5,10 @@ import ParticlesAuth from "../ParticlesAuth";
 
 //import images
 import logoLight from "../../../assets/images/logo-light.png";
+import aiLogo from "../../../assets/images/ai-cloud-logo.svg";
 
 const BasicTwosVerify = () => {
-    document.title = "Two Step Verification | Velzon - React Admin & Dashboard Template";
+    document.title = "Two Step Verification ";
 
     const getInputElement = (index) => {
         return document.getElementById('digit' + index + '-input');
@@ -36,7 +37,7 @@ const BasicTwosVerify = () => {
                                     <div className="text-center mt-sm-5 mb-4 text-white-50">
                                         <div>
                                             <Link to="/dashboard" className="d-inline-block auth-logo">
-                                                <img src={logoLight} alt="" height="20" />
+                                                <img src={aiLogo} alt="" height="20" />
                                             </Link>
                                         </div>
                                         <p className="mt-3 fs-16 fw-semibold">Premium Admin & Dashboard Template</p>

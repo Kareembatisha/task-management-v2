@@ -1,18 +1,17 @@
-import React from 'react';
-import { Col, Container, Row } from 'reactstrap';
-import BreadCrumb from '../../../Components/Common/BreadCrumb';
+import React from "react";
+import { Col, Container, Row } from "reactstrap";
+import BreadCrumb from "../../../Components/Common/BreadCrumb";
 
 const Starter = () => {
-  document.title="Starter | Velzon - React Admin & Dashboard Template";
+  document.title = "Starter ";
 
   return (
-    <React.Fragment>      
+    <React.Fragment>
       <div className="page-content">
         <Container fluid>
           <BreadCrumb title="Starter" pageTitle="Pages" />
           <Row>
-            <Col xs={12}>
-            </Col>
+            <Col xs={12}></Col>
           </Row>
         </Container>
       </div>

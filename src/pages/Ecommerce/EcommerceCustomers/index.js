@@ -20,7 +20,7 @@ import Flatpickr from "react-flatpickr";
 import { isEmpty } from "lodash";
 import * as moment from "moment";
 
-import { toast, ToastContainer } from "react-toastify";
+
 
 // Formik
 import * as Yup from "yup";
@@ -47,18 +47,22 @@ import ExportCSVModal from "../../../Components/Common/ExportCSVModal";
 import { createSelector } from "reselect";
 
 const EcommerceCustomers = () => {
+
   const dispatch = useDispatch();
 
   const selectLayoutState = (state) => state.Ecommerce;
-  const ecomCustomerProperties = createSelector(selectLayoutState, (ecom) => ({
-    customers: ecom.customers,
-    isCustomerSuccess: ecom.isCustomerSuccess,
-    error: ecom.error,
-  }));
-  // Inside your component
-  const { customers, isCustomerSuccess, error } = useSelector(
-    ecomCustomerProperties
+  const ecomCustomerProperties = createSelector(
+    selectLayoutState,
+    (ecom) => ({
+      customers: ecom.customers,
+      isCustomerSuccess: ecom.isCustomerSuccess,
+      error: ecom.error,
+    })
   );
+  // Inside your component
+  const {
+    customers, isCustomerSuccess, error
+  } = useSelector(ecomCustomerProperties)
 
   const [isEdit, setIsEdit] = useState(false);
   const [customer, setCustomer] = useState([]);
@@ -99,17 +103,17 @@ const EcommerceCustomers = () => {
     enableReinitialize: true,
 
     initialValues: {
-      customer: (customer && customer.customer) || "",
-      email: (customer && customer.email) || "",
-      phone: (customer && customer.phone) || "",
-      date: (customer && customer.date) || "",
-      status: (customer && customer.status) || "",
+      customer: (customer && customer.customer) || '',
+      email: (customer && customer.email) || '',
+      phone: (customer && customer.phone) || '',
+      date: (customer && customer.date) || '',
+      status: (customer && customer.status) || '',
     },
     validationSchema: Yup.object({
       customer: Yup.string().required("Please Enter Customer Name"),
       email: Yup.string().required("Please Enter Your Email"),
       phone: Yup.string().required("Please Enter Your Phone"),
-      status: Yup.string().required("Please Enter Your Status"),
+      status: Yup.string().required("Please Enter Your Status")
     }),
     onSubmit: (values) => {
       if (isEdit) {
@@ -131,7 +135,7 @@ const EcommerceCustomers = () => {
           email: values["email"],
           phone: values["phone"],
           date: date,
-          status: values["status"],
+          status: values["status"]
         };
         // save new customer
         dispatch(onAddNewCustomer(newCustomer));
@@ -150,30 +154,29 @@ const EcommerceCustomers = () => {
   };
 
   // Update Data
-  const handleCustomerClick = useCallback(
-    (arg) => {
-      const customer = arg;
+  const handleCustomerClick = useCallback((arg) => {
+    const customer = arg;
 
-      setCustomer({
-        _id: customer._id,
-        customer: customer.customer,
-        email: customer.email,
-        phone: customer.phone,
-        date: customer.date,
-        status: customer.status,
-      });
+    setCustomer({
+      _id: customer._id,
+      customer: customer.customer,
+      email: customer.email,
+      phone: customer.phone,
+      date: customer.date,
+      status: customer.status
+    });
 
-      setIsEdit(true);
-      toggle();
-    },
-    [toggle]
-  );
+    setIsEdit(true);
+    toggle();
+  }, [toggle]);
+
 
   useEffect(() => {
     if (customers && !customers.length) {
       dispatch(onGetCustomers());
     }
   }, [dispatch, customers]);
+
 
   useEffect(() => {
     setCustomer(customers);
@@ -193,7 +196,7 @@ const EcommerceCustomers = () => {
     toggle();
   };
 
-  // Node API
+  // Node API 
   // useEffect(() => {
   //   if (isCustomerCreated) {
   //     setCustomer(null);
@@ -204,7 +207,7 @@ const EcommerceCustomers = () => {
   //   isCustomerCreated,
   // ]);
 
-  const handleValidDate = (date) => {
+  const handleValidDate = date => {
     const date1 = moment(new Date(date)).format("DD MMM Y");
     return date1;
   };
@@ -234,9 +237,7 @@ const EcommerceCustomers = () => {
     const checkall = document.getElementById("checkBoxAll");
     selectedCheckBoxDelete.forEach((element) => {
       dispatch(onDeleteCustomer(element.value));
-      setTimeout(() => {
-        toast.clearWaitingQueue();
-      }, 3000);
+      setTimeout(() => { toast.clearWaitingQueue(); }, 3000);
     });
     setIsMultiDeleteButton(false);
     checkall.checked = false;
@@ -244,9 +245,7 @@ const EcommerceCustomers = () => {
 
   const deleteCheckbox = () => {
     const ele = document.querySelectorAll(".customerCheckBox:checked");
-    ele.length > 0
-      ? setIsMultiDeleteButton(true)
-      : setIsMultiDeleteButton(false);
+    ele.length > 0 ? setIsMultiDeleteButton(true) : setIsMultiDeleteButton(false);
     setSelectedCheckBoxDelete(ele);
   };
 
@@ -254,26 +253,12 @@ const EcommerceCustomers = () => {
   const columns = useMemo(
     () => [
       {
-        header: (
-          <input
-            type="checkbox"
-            id="checkBoxAll"
-            className="form-check-input"
-            onClick={() => checkedAll()}
-          />
-        ),
+        header: <input type="checkbox" id="checkBoxAll" className="form-check-input" onClick={() => checkedAll()} />,
         cell: (cell) => {
-          return (
-            <input
-              type="checkbox"
-              className="customerCheckBox form-check-input"
-              value={cell.getValue()}
-              onChange={() => deleteCheckbox()}
-            />
-          );
+          return <input type="checkbox" className="customerCheckBox form-check-input" value={cell.getValue()} onChange={() => deleteCheckbox()} />;
         },
-        id: "#",
-        accessorKey: "id",
+        id: '#',
+        accessorKey: 'id',
         enableColumnFilter: false,
         enableSorting: false,
       },
@@ -296,7 +281,11 @@ const EcommerceCustomers = () => {
         header: "Joining Date",
         accessorKey: "date",
         enableColumnFilter: false,
-        cell: (cell) => <>{handleValidDate(cell.getValue())}</>,
+        cell: (cell) => (
+          <>
+            {handleValidDate(cell.getValue())}
+          </>
+        ),
       },
       {
         header: "Status",
@@ -305,28 +294,13 @@ const EcommerceCustomers = () => {
         cell: (cell) => {
           switch (cell.getValue()) {
             case "Active":
-              return (
-                <span className="badge text-uppercase bg-success-subtle text-success">
-                  {" "}
-                  {cell.getValue()}{" "}
-                </span>
-              );
+              return <span className="badge text-uppercase bg-success-subtle text-success"> {cell.getValue()} </span>;
             case "Block":
-              return (
-                <span className="badge text-uppercase bg-danger-subtle text-danger">
-                  {" "}
-                  {cell.getValue()}{" "}
-                </span>
-              );
+              return <span className="badge text-uppercase bg-danger-subtle text-danger"> {cell.getValue()} </span>;
             default:
-              return (
-                <span className="badge text-uppercase bg-info-subtle text-info">
-                  {" "}
-                  {cell.getValue()}{" "}
-                </span>
-              );
+              return <span className="badge text-uppercase bg-info-subtle text-info"> {cell.getValue()} </span>;
           }
-        },
+        }
       },
       {
         header: "Action",
@@ -337,11 +311,9 @@ const EcommerceCustomers = () => {
                 <Link
                   to="#"
                   className="text-primary d-inline-block edit-item-btn"
-                  onClick={() => {
-                    const customerData = cellProps.row.original;
-                    handleCustomerClick(customerData);
-                  }}
+                  onClick={() => { const customerData = cellProps.row.original; handleCustomerClick(customerData); }}
                 >
+
                   <i className="ri-pencil-fill fs-16"></i>
                 </Link>
               </li>
@@ -349,10 +321,7 @@ const EcommerceCustomers = () => {
                 <Link
                   to="#"
                   className="text-danger d-inline-block remove-item-btn"
-                  onClick={() => {
-                    const customerData = cellProps.row.original;
-                    onClickDelete(customerData);
-                  }}
+                  onClick={() => { const customerData = cellProps.row.original; onClickDelete(customerData); }}
                 >
                   <i className="ri-delete-bin-5-fill fs-16"></i>
                 </Link>
@@ -365,29 +334,11 @@ const EcommerceCustomers = () => {
     [handleCustomerClick, checkedAll]
   );
 
+
   const dateFormat = () => {
     let d = new Date(),
-      months = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ];
-    return (
-      d.getDate() +
-      " " +
-      months[d.getMonth()] +
-      ", " +
-      d.getFullYear()
-    ).toString();
+      months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return ((d.getDate() + ' ' + months[d.getMonth()] + ', ' + d.getFullYear()).toString());
   };
 
   const [date, setDate] = useState(dateFormat());
@@ -401,7 +352,7 @@ const EcommerceCustomers = () => {
   // Export Modal
   const [isExportCSV, setIsExportCSV] = useState(false);
 
-  document.title = "Customers | Velzon - React Admin & Dashboard Template";
+  document.title = "Customers ";
   return (
     <React.Fragment>
       <div className="page-content">
@@ -439,31 +390,20 @@ const EcommerceCustomers = () => {
                     </div>
                     <div className="col-sm-auto">
                       <div className="d-flex flex-wrap align-items-start gap-2">
-                        {isMultiDeleteButton && (
-                          <button
-                            className="btn btn-soft-danger me-1"
-                            onClick={() => setDeleteModalMulti(true)}
-                          >
-                            <i className="ri-delete-bin-2-line"></i>
-                          </button>
-                        )}
+                        {isMultiDeleteButton && <button className="btn btn-soft-danger me-1"
+                          onClick={() => setDeleteModalMulti(true)}
+                        ><i className="ri-delete-bin-2-line"></i></button>}
+
                         <button
                           type="button"
                           className="btn btn-secondary add-btn"
                           id="create-btn"
-                          onClick={() => {
-                            setIsEdit(false);
-                            toggle();
-                          }}
+                          onClick={() => { setIsEdit(false); toggle(); }}
                         >
                           <i className="ri-add-line align-bottom me-1"></i> Add
                           Customer
                         </button>{" "}
-                        <button
-                          type="button"
-                          className="btn btn-success"
-                          onClick={() => setIsExportCSV(true)}
-                        >
+                        <button type="button" className="btn btn-success" onClick={() => setIsExportCSV(true)}>
                           <i className="ri-file-download-line align-bottom me-1"></i>{" "}
                           Export
                         </button>
@@ -476,7 +416,7 @@ const EcommerceCustomers = () => {
                     {isCustomerSuccess && customers.length ? (
                       <TableContainer
                         columns={columns}
-                        data={customers || []}
+                        data={(customers || [])}
                         isGlobalFilter={true}
                         isAddUserList={false}
                         customPageSize={10}
@@ -484,25 +424,21 @@ const EcommerceCustomers = () => {
                         theadClass="table-light text-muted"
                         handleCustomerClick={handleCustomerClicks}
                         isCustomerFilter={true}
-                        SearchPlaceholder="Search for customer, email, phone, status or something..."
+                        SearchPlaceholder='Search for customer, email, phone, status or something...'
                       />
-                    ) : (
-                      <Loader error={error} />
-                    )}
+                    ) : (<Loader error={error} />)
+                    }
                   </div>
 
                   <Modal id="showModal" isOpen={modal} toggle={toggle} centered>
                     <ModalHeader className="bg-light p-3" toggle={toggle}>
                       {!!isEdit ? "Edit Customer" : "Add Customer"}
                     </ModalHeader>
-                    <Form
-                      className="tablelist-form"
-                      onSubmit={(e) => {
-                        e.preventDefault();
-                        validation.handleSubmit();
-                        return false;
-                      }}
-                    >
+                    <Form className="tablelist-form" onSubmit={(e) => {
+                      e.preventDefault();
+                      validation.handleSubmit();
+                      return false;
+                    }}>
                       <ModalBody>
                         <input type="hidden" id="id-field" />
 
@@ -543,17 +479,11 @@ const EcommerceCustomers = () => {
                             onBlur={validation.handleBlur}
                             value={validation.values.customer || ""}
                             invalid={
-                              validation.touched.customer &&
-                              validation.errors.customer
-                                ? true
-                                : false
+                              validation.touched.customer && validation.errors.customer ? true : false
                             }
                           />
-                          {validation.touched.customer &&
-                          validation.errors.customer ? (
-                            <FormFeedback type="invalid">
-                              {validation.errors.customer}
-                            </FormFeedback>
+                          {validation.touched.customer && validation.errors.customer ? (
+                            <FormFeedback type="invalid">{validation.errors.customer}</FormFeedback>
                           ) : null}
                         </div>
 
@@ -570,18 +500,13 @@ const EcommerceCustomers = () => {
                             onBlur={validation.handleBlur}
                             value={validation.values.email || ""}
                             invalid={
-                              validation.touched.email &&
-                              validation.errors.email
-                                ? true
-                                : false
+                              validation.touched.email && validation.errors.email ? true : false
                             }
                           />
-                          {validation.touched.email &&
-                          validation.errors.email ? (
-                            <FormFeedback type="invalid">
-                              {validation.errors.email}
-                            </FormFeedback>
+                          {validation.touched.email && validation.errors.email ? (
+                            <FormFeedback type="invalid">{validation.errors.email}</FormFeedback>
                           ) : null}
+
                         </div>
 
                         <div className="mb-3">
@@ -597,18 +522,13 @@ const EcommerceCustomers = () => {
                             onBlur={validation.handleBlur}
                             value={validation.values.phone || ""}
                             invalid={
-                              validation.touched.phone &&
-                              validation.errors.phone
-                                ? true
-                                : false
+                              validation.touched.phone && validation.errors.phone ? true : false
                             }
                           />
-                          {validation.touched.phone &&
-                          validation.errors.phone ? (
-                            <FormFeedback type="invalid">
-                              {validation.errors.phone}
-                            </FormFeedback>
+                          {validation.touched.phone && validation.errors.phone ? (
+                            <FormFeedback type="invalid">{validation.errors.phone}</FormFeedback>
                           ) : null}
+
                         </div>
 
                         <div className="mb-3">
@@ -626,13 +546,13 @@ const EcommerceCustomers = () => {
                               altFormat: "d M, Y",
                               dateFormat: "d M, Y",
                             }}
-                            onChange={(e) => dateformate(e)}
+                            onChange={(e) =>
+                              dateformate(e)
+                            }
                             value={validation.values.date || ""}
                           />
                           {validation.touched.date && validation.errors.date ? (
-                            <FormFeedback type="invalid">
-                              {validation.errors.date}
-                            </FormFeedback>
+                            <FormFeedback type="invalid">{validation.errors.date}</FormFeedback>
                           ) : null}
                         </div>
 
@@ -648,20 +568,18 @@ const EcommerceCustomers = () => {
                             id="status-field"
                             onChange={validation.handleChange}
                             onBlur={validation.handleBlur}
-                            value={validation.values.status || ""}
+                            value={
+                              validation.values.status || ""
+                            }
                           >
                             {customermocalstatus.map((item, key) => (
                               <React.Fragment key={key}>
-                                {item.options.map((item, key) => (
-                                  <option value={item.value} key={key}>
-                                    {item.label}
-                                  </option>
-                                ))}
+                                {item.options.map((item, key) => (<option value={item.value} key={key}>{item.label}</option>))}
                               </React.Fragment>
                             ))}
                           </Input>
                           {validation.touched.status &&
-                          validation.errors.status ? (
+                            validation.errors.status ? (
                             <FormFeedback type="invalid">
                               {validation.errors.status}
                             </FormFeedback>
@@ -670,21 +588,9 @@ const EcommerceCustomers = () => {
                       </ModalBody>
                       <ModalFooter>
                         <div className="hstack gap-2 justify-content-end">
-                          <button
-                            type="button"
-                            className="btn btn-light"
-                            onClick={() => {
-                              setModal(false);
-                            }}
-                          >
-                            {" "}
-                            Close{" "}
-                          </button>
+                          <button type="button" className="btn btn-light" onClick={() => { setModal(false); }}> Close </button>
 
-                          <button type="submit" className="btn btn-success">
-                            {" "}
-                            {!!isEdit ? "Update" : "Add Customer"}{" "}
-                          </button>
+                          <button type="submit" className="btn btn-success"> {!!isEdit ? "Update" : "Add Customer"} </button>
                         </div>
                       </ModalFooter>
                     </Form>

@@ -113,7 +113,7 @@ const InvoiceCreate = () => {
     setDate(joinDate);
   };
 
-  document.title = "Create Invoice | Velzon - React Admin & Dashboard Template";
+  document.title = "Create Invoice ";
 
   const validation = useFormik({
     enableReinitialize: true,

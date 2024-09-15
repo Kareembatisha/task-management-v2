@@ -1,0 +1,44 @@
+/* styles.css */
+.atm-card {
+    background: linear-gradient(135deg, #0044cc, #00aaff); /* Blue gradient */
+    color: #fff;
+    padding: 20px;
+    
+    
+  }
+.atm-card-basic {
+    
+    color: #000000;
+    padding: 20px;
+    
+    
+  }
+  
+  .atm-card-alt {
+    background: linear-gradient(135deg, #ff5722, #ff8a00); /* Orange gradient */
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .card-number {
+    font-size: 1.2rem;
+  }
+  
+  .card-details {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .card-label {
+    font-weight: bold;
+  }
+  .sun {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #FFD700 0%, #FFA500 40%, #FF4500 100%);
+    box-shadow: 0 0 20px rgba(255, 223, 0, 0.8), 0 0 30px rgba(255, 140, 0, 0.6);
+}
+  

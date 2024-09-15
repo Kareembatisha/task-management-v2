@@ -1,25 +1,39 @@
 const getChartColorsArray = (colors) => {
-    colors = JSON.parse(colors);
-    return colors.map(function (value) {
-        var newValue = value.replace(" ", "");
+    try {
+      // Parse JSON string to array
+      colors = JSON.parse(colors);
+      
+      // Map over the color array
+      return colors.map(value => {
+        // Remove spaces from the color value
+        const newValue = value.replace(/\s+/g, '');
+  
+        // If the value doesn't contain a comma, assume it's a named color
         if (newValue.indexOf(",") === -1) {
-            var color = getComputedStyle(document.documentElement).getPropertyValue(newValue);
-
-            if (color.indexOf("#") !== -1)
-                color = color.replace(" ", "");
-            if (color) return color;
-            else return newValue;
+          let color = getComputedStyle(document.documentElement).getPropertyValue(newValue);
+          color = color ? color.trim() : newValue;
+  
+          // Return the resolved color or fallback to the original value
+          return color.startsWith("#") ? color : newValue;
         } else {
-            var val = value.split(',');
-            if (val.length === 2) {
-                var rgbaColor = getComputedStyle(document.documentElement).getPropertyValue(val[0]);
-                rgbaColor = "rgba(" + rgbaColor + "," + val[1] + ")";
-                return rgbaColor;
-            } else {
-                return newValue;
-            }
+          // Handle RGBA values
+          const val = newValue.split(',');
+          if (val.length === 2) {
+            let rgbaColor = getComputedStyle(document.documentElement).getPropertyValue(val[0]);
+            rgbaColor = rgbaColor ? rgbaColor.trim() : '';
+            return rgbaColor ? `rgba(${rgbaColor}, ${val[1]})` : newValue;
+          } else {
+            // If not valid RGBA format, return as-is
+            return newValue;
+          }
         }
-    });
-};
-
-export default getChartColorsArray;
+      });
+    } catch (error) {
+      console.error('Error processing colors:', error);
+      // Return a default set of colors or handle as needed
+      return ['#2565d5']; // Fallback color
+    }
+  };
+  
+  export default getChartColorsArray;
+  

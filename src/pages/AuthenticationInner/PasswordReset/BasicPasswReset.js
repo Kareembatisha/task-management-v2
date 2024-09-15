@@ -2,14 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Alert, Card, CardBody, Col, Container, Row, Form, Label, Input, FormFeedback } from 'reactstrap';
 import ParticlesAuth from '../ParticlesAuth';
-import logoLight from "../../../assets/images/logo-light.png";
+import aiLogo from "../../../assets/images/ai-cloud-logo.svg";
 
 //formik
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 const BasicPasswReset = () => {
-    document.title="Reset Password | Velzon - React Admin & Dashboard Template";
+    document.title="Reset Password ";
 
     const validation = useFormik({
         enableReinitialize: true,
@@ -35,7 +35,7 @@ const BasicPasswReset = () => {
                             <div className="text-center mt-sm-5 mb-4 text-white-50">
                                 <div>
                                     <Link to="/#" className="d-inline-block auth-logo">
-                                        <img src={logoLight} alt="" height="20" />
+                                        <img src={aiLogo} alt="" height="20" />
                                     </Link>
                                 </div>
                                 <p className="mt-3 fs-16 fw-semibold">Premium Admin & Dashboard Template</p>

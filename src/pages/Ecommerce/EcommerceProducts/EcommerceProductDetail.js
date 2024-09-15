@@ -17,6 +17,7 @@ import {
 
 //Simple bar
 import SimpleBar from "simplebar-react";
+import "simplebar-react/dist/simplebar.min.css";
 
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 
@@ -35,7 +36,7 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
-import  { FreeMode, Navigation, Thumbs } from "swiper/modules"
+import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import SwiperCore from "swiper";
 
 import { Link } from "react-router-dom";
@@ -114,7 +115,7 @@ const PricingWidgetList = (props) => {
 };
 
 function EcommerceProductDetail(props) {
-  document.title="Product Details | Velzon - React Admin & Dashboard Template";
+  document.title ="Product Details ";
 
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [ttop, setttop] = useState(false);
@@ -124,7 +125,7 @@ function EcommerceProductDetail(props) {
   const [lsize, setlsize] = useState(false);
   const [xlsize, setxlsize] = useState(false);
   const [customActiveTab, setcustomActiveTab] = useState("1");
-  const toggleCustom = tab => {
+  const toggleCustom = (tab) => {
     if (customActiveTab !== tab) {
       setcustomActiveTab(tab);
     }
@@ -132,7 +133,7 @@ function EcommerceProductDetail(props) {
 
   return (
     <div className="page-content">
-      <Container fluid>     
+      <Container fluid>
         <BreadCrumb title="Product Details" pageTitle="Ecommerce" />
         <Row>
           <Col lg={12}>
@@ -594,14 +595,11 @@ function EcommerceProductDetail(props) {
                         </Nav>
 
                         <TabContent
-                        activeTab={customActiveTab}
+                          activeTab={customActiveTab}
                           className="border border-top-0 p-4"
                           id="nav-tabContent"
                         >
-                          <TabPane
-                            id="nav-speci"
-                            tabId="1"
-                          >
+                          <TabPane id="nav-speci" tabId="1">
                             <div className="table-responsive">
                               <table className="table mb-0">
                                 <tbody>
@@ -631,10 +629,7 @@ function EcommerceProductDetail(props) {
                               </table>
                             </div>
                           </TabPane>
-                          <TabPane
-                            id="nav-detail"
-                            tabId="2"
-                          >
+                          <TabPane id="nav-detail" tabId="2">
                             <div>
                               <h5 className="mb-3">
                                 Tommy Hilfiger Sweatshirt for Men (Pink)

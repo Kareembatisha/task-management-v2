@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card, CardBody, Col, Container, Row, Form, Input, Label, FormFeedback } from 'reactstrap';
 import ParticlesAuth from '../ParticlesAuth';
-import logoLight from "../../../assets/images/logo-light.png";
+import aiLogo from "../../../assets/images/ai-cloud-logo.svg";
 
 //formik
 import { useFormik } from 'formik';
@@ -10,7 +10,7 @@ import * as Yup from 'yup';
 
 const BasicPasswCreate = () => {
 
-    document.title = "Create New Password | Velzon - React Admin & Dashboard Template";
+    document.title = "Create New Password ";
 
     const [passwordShow, setPasswordShow] = useState(false);
     const [confrimPasswordShow, setConfrimPasswordShow] = useState(false);    
@@ -52,7 +52,7 @@ const BasicPasswCreate = () => {
                             <div className="text-center mt-sm-5 mb-4 text-white-50">
                                 <div>
                                     <Link to="/#" className="d-inline-block auth-logo">
-                                        <img src={logoLight} alt="" height="20" />
+                                        <img src={aiLogo} alt="" height="20" />
                                     </Link>
                                 </div>
                                 <p className="mt-3 fs-15 fw-medium">Premium Admin & Dashboard Template</p>

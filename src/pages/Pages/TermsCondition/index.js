@@ -4,8 +4,7 @@ import { Button, Card, CardBody, Col, Container, Row } from "reactstrap";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
 
 const TermsCondition = () => {
-  document.title =
-    "Terms & Condition | Velzon - React Admin & Dashboard Template";
+  document.title = "Terms & Condition ";
   return (
     <React.Fragment>
       <div className="page-content">
@@ -165,9 +164,7 @@ const TermsCondition = () => {
                   </div>
 
                   <div className="text-end">
-                    <Button className="btn-success">
-                      Accept
-                    </Button>
+                    <Button className="btn-success">Accept</Button>
                     <Button className="btn-outline-danger">
                       <i className="ri-close-line align-bottom me-1"></i>{" "}
                       Decline

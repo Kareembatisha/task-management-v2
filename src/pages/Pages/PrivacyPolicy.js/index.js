@@ -2,10 +2,10 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { Button, Card, CardBody, Col, Container, Row } from "reactstrap";
 import BreadCrumb from "../../../Components/Common/BreadCrumb";
-import FeatherIcon from 'feather-icons-react';
+import FeatherIcon from "feather-icons-react";
 
 const PrivacyPolicy = () => {
-  document.title = "Privacy Policy | Velzon - React Admin & Dashboard Template";
+  document.title = "Privacy Policy ";
   return (
     <React.Fragment>
       <div className="page-content">
@@ -51,7 +51,10 @@ const PrivacyPolicy = () => {
                 <CardBody className="card-body p-4">
                   <div className="d-flex">
                     <div className="flex-shrink-0 me-3">
-                      <FeatherIcon icon="check-circle" className={"text-primary icon-dual-primary icon-xs"} />
+                      <FeatherIcon
+                        icon="check-circle"
+                        className={"text-primary icon-dual-primary icon-xs"}
+                      />
                       <i
                         data-feather="check-circle"
                         className="text-primary icon-dual-primary icon-xs"
@@ -122,7 +125,10 @@ const PrivacyPolicy = () => {
 
                   <div className="d-flex">
                     <div className="flex-shrink-0 me-3">
-                      <FeatherIcon icon="check-circle" className={"text-primary icon-dual-primary icon-xs"} />
+                      <FeatherIcon
+                        icon="check-circle"
+                        className={"text-primary icon-dual-primary icon-xs"}
+                      />
                       <i
                         data-feather="check-circle"
                         className="text-primary icon-dual-primary icon-xs"
@@ -178,7 +184,10 @@ const PrivacyPolicy = () => {
 
                   <div className="d-flex">
                     <div className="flex-shrink-0 me-3">
-                      <FeatherIcon icon="check-circle" className={"text-primary icon-dual-primary icon-xs"} />
+                      <FeatherIcon
+                        icon="check-circle"
+                        className={"text-primary icon-dual-primary icon-xs"}
+                      />
                       <i
                         data-feather="check-circle"
                         className="text-primary icon-dual-primary icon-xs"
@@ -208,9 +217,7 @@ const PrivacyPolicy = () => {
                   </div>
 
                   <div className="text-end">
-                    <Button className="btn-danger">
-                      I'm Understand
-                    </Button>
+                    <Button className="btn-danger">I'm Understand</Button>
                   </div>
                 </CardBody>
               </Card>

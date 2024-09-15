@@ -2,10 +2,25 @@ import React from "react";
 import ReactApexChart from "react-apexcharts";
 import getChartColorsArray from "../../Components/Common/ChartsDynamicColor";
 
-const RevenueCharts = ({dataColors, series}) => {
-  var linechartcustomerColors = getChartColorsArray(dataColors);
-  
-  var options = {
+const RevenueCharts = ({ dataColors, series }) => {
+  const linechartcustomerColors = getChartColorsArray(dataColors);
+
+  // Function to calculate percentages
+  const calculatePercentages = (data) => {
+    if (!Array.isArray(data)) return [];
+    const total = data.reduce((acc, value) => acc + value, 0);
+    return data.map((value) =>
+      total > 0 ? ((value / total) * 100).toFixed(2) : 0
+    );
+  };
+
+  // Ensure series is an array of arrays
+  const isArrayOfArrays = Array.isArray(series) && series.every(Array.isArray);
+  const seriesPercentages = isArrayOfArrays
+    ? series.map(calculatePercentages)
+    : [];
+
+  const options = {
     chart: {
       height: 370,
       type: "line",
@@ -14,7 +29,7 @@ const RevenueCharts = ({dataColors, series}) => {
       },
     },
     stroke: {
-      curve: "straight",
+      curve: "smooth",
       dashArray: [0, 0, 8],
       width: [2, 0, 2.2],
     },
@@ -30,24 +45,29 @@ const RevenueCharts = ({dataColors, series}) => {
     },
     xaxis: {
       categories: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
+        "zone 1",
+        "zone 2",
+        "zone 3",
+        "zone 4",
+        "zone 5",
+        "zone 6",
+        "zone 7",
+        "zone 8",
+        "zone 9",
+        "zone 10",
+        "zone 11",
+        "zone 12",
       ],
       axisTicks: {
         show: false,
       },
       axisBorder: {
         show: false,
+      },
+    },
+    yaxis: {
+      labels: {
+        formatter: (value) => `${value}%`, // Format y-axis labels as percentages
       },
     },
     grid: {
@@ -84,46 +104,25 @@ const RevenueCharts = ({dataColors, series}) => {
         vertical: 0,
       },
     },
-    plotOptions: {
-      bar: {
-        columnWidth: "30%",
-        barHeight: "70%",
-      },
-    },
     colors: linechartcustomerColors,
     tooltip: {
       shared: true,
-      y: [
-        {
-          formatter: function (y) {
-            if (typeof y !== "undefined") {
-              return y.toFixed(0);
-            }
-            return y;
-          },
+      y: series.map((_, seriesIndex) => ({
+        formatter: function (value) {
+          if (typeof value !== "undefined") {
+            const percentage = seriesPercentages[seriesIndex]?.[0] ?? 0; // Adjust as needed
+            return percentage + "%";
+          }
+          return value;
         },
-        {
-          formatter: function (y) {
-            if (typeof y !== "undefined") {
-              return "$" + y.toFixed(2) + "k";
-            }
-            return y;
-          },
-        },
-        {
-          formatter: function (y) {
-            if (typeof y !== "undefined") {
-              return y.toFixed(0) + " Sales";
-            }
-            return y;
-          },
-        },
-      ],
+      })),
     },
   };
+
   return (
     <React.Fragment>
-      <ReactApexChart dir="ltr"
+      <ReactApexChart
+        dir="ltr"
         options={options}
         series={series}
         type="line"
@@ -134,12 +133,12 @@ const RevenueCharts = ({dataColors, series}) => {
   );
 };
 
-const StoreVisitsCharts = ({dataColors}) => {
+const StoreVisitsCharts = ({ dataColors }) => {
   var chartDonutBasicColors = getChartColorsArray(dataColors);
 
   const series = [44, 55, 41, 17, 15];
   var options = {
-    labels: ["Direct", "Social", "Email", "Other", "Referrals"],
+    labels: ["In progress", "Completed", "Pending", "Not Resolved", "Open"],
     chart: {
       height: 333,
       type: "donut",
@@ -159,7 +158,8 @@ const StoreVisitsCharts = ({dataColors}) => {
   };
   return (
     <React.Fragment>
-      <ReactApexChart dir="ltr"
+      <ReactApexChart
+        dir="ltr"
         options={options}
         series={series}
         type="donut"

@@ -35,7 +35,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import { Link } from "react-router-dom"
 import SimpleBar from "simplebar-react"
 // import moment from "moment"
-import { ToastContainer } from "react-toastify"
+
 import Spinners from "../../../Components/Common/Spinner";
 import { AddTeamMember, headData } from "../../../common/data"
 import DeleteModal from "../../../Components/Common/DeleteModal";

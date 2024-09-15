@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardBody, Col, DropdownItem, DropdownMenu, DropdownToggle, Input, Row, UncontrolledDropdown } from 'reactstrap';
 import DeleteModal from "../../../Components/Common/DeleteModal";
-import { ToastContainer } from 'react-toastify';
+
 
 //redux
 import { useSelector, useDispatch } from 'react-redux';

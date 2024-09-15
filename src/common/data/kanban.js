@@ -41,7 +41,7 @@ const headData = [
 const tasklist = [
   {
     id: "1",
-    name: "Unassigned",
+    name: "Open Tasks",
     badge: 2,
     color: "success",
     cards: [
@@ -73,7 +73,7 @@ const tasklist = [
   },
   {
     id: "4",
-    name: "To Do",
+    name: "Tasks",
     badge: 2,
     color: "secondary",
     cards: [
@@ -137,7 +137,7 @@ const tasklist = [
   },
   {
     id: "10",
-    name: "IN REVIEWS",
+    name: "Pending",
     badge: 3,
     color: "info",
     cards: [
@@ -204,9 +204,9 @@ const tasklist = [
   },
   {
     id: "16",
-    name: "New",
+    name: "Not Resolved",
     badge: 1,
-    color: "success",
+    color: "danger",
     cards: [
       {
         id: "17",

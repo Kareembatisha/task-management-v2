@@ -30,7 +30,7 @@ import { orderSummary } from "../../common/data/ecommerce";
 import { Link } from "react-router-dom";
 
 const EcommerceCheckout = () => {
-  document.title="Checkout | Velzon - React Admin & Dashboard Template";
+  document.title="Checkout ";
 
   const [selectedCountry, setselectedCountry] = useState(null);
   const [selectedState, setselectedState] = useState(null);

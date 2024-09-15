@@ -36,7 +36,7 @@ import SellerChats from "./SellerChats";
 import { createSelector } from "reselect";
 
 const EcommerceSellers = () => {
-  document.title = "Sellers | Velzon - React Admin & Dashboard Template";
+  document.title = "Sellers ";
 
   const dispatch = useDispatch();
   const [sellerList, setSellerList] = useState([]);
