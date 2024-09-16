@@ -1,12 +1,25 @@
-import React from 'react'
-import RecentOrders from './RecentOrders'
+import React from "react";
+import { Container, Row } from "reactstrap";
+import BreadCrumb from "../../Components/Common/BreadCrumb";
+import AllTasks from "./AllTasks";
+import Widgets from "./Widgets";
 
-function TaskList() {
+const TaskList = () => {
+  document.title = "Tasks List | Velzon - React Admin & Dashboard Template";
+
   return (
-    <div className='page-content'>
-        <RecentOrders/>
-    </div>
-  )
-}
+    <React.Fragment>
+      <div className="page-content">
+        <Container fluid>
+          <BreadCrumb title="Tasks List" pageTitle="Tasks" />
+          <Row>
+            <Widgets />
+          </Row>
+          <AllTasks />
+        </Container>
+      </div>
+    </React.Fragment>
+  );
+};
 
-export default TaskList
+export default TaskList;
