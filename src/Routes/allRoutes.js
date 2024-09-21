@@ -64,6 +64,11 @@ import Optimus from "../pages/Optimus/Optimus.jsx";
 import TeamManagement from "../pages/TeamManagement/TeamManagement.jsx";
 import TimeSheet from "../pages/TimeSheet/TimeSheet.jsx";
 import MetricsReport from "../pages/MetricsReport/MetricsReport.jsx";
+import Designation from "../pages/DataTables/Designation/Designation.jsx";
+import Departments from "../pages/DataTables/Departments/Departments.jsx";
+import Project from "../pages/DataTables/Project/Project.jsx";
+import Tasks from "../pages/DataTables/Tasks/Tasks.jsx";
+import Productivities from "../pages/DataTables/Productivities/Productivities.jsx";
 
 const authProtectedRoutes = [
   { path: "/buildingTable", component: <BuildingTable /> },
@@ -71,11 +76,16 @@ const authProtectedRoutes = [
   { path: "/floorTable", component: <FloorTable /> },
   { path: "/zoneTable", component: <ZoneTable /> },
 
-  { path: "/feedback", component: <Feedback /> },
+  { path: "/projects", component: <Feedback /> },
   { path: "/userTasks", component: <MainUserTask /> },
   { path: "/adminTasks", component: <AdminTasks /> },
   { path: "/userDashboard", component: <UserDashboard /> },
   { path: "/adminDataTable", component: <Admin /> },
+  { path: "/Designation", component: <Designation /> },
+  { path: "/Departments", component: <Departments /> },
+  { path: "/Project", component: <Project /> },
+  { path: "/Tasks", component: <Tasks /> },
+  { path: "/Productivities", component: <Productivities /> },
   { path: "/areaDataTable", component: <Area /> },
   { path: "/cityDataTable", component: <City /> },
   { path: "/countryDataTable", component: <Country /> },

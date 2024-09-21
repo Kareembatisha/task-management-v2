@@ -21,7 +21,7 @@ import List from "list.js";
 //Import Flatepicker
 import Flatpickr from "react-flatpickr";
 
-const User = () => {
+const Project = () => {
   const [modal_list, setmodal_list] = useState(false);
   function tog_list() {
     setmodal_list(!modal_list);
@@ -36,7 +36,7 @@ const User = () => {
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
-          <BreadCrumb title="User List" pageTitle="Tables" />
+          <BreadCrumb title="Project List" pageTitle="Tables" />
           <Row>
             <Col lg={12}>
               <Card>
@@ -912,4 +912,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default Project;
