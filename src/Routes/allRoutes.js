@@ -69,6 +69,9 @@ import Departments from "../pages/DataTables/Departments/Departments.jsx";
 import Project from "../pages/DataTables/Project/Project.jsx";
 import Tasks from "../pages/DataTables/Tasks/Tasks.jsx";
 import Productivities from "../pages/DataTables/Productivities/Productivities.jsx";
+import Attachment from "../pages/Attachment/Attachment.jsx";
+import TaskComment from "../pages/TaskComment/TaskComment.jsx";
+import TaskActivities from "../pages/TaskActivities/TaskActivities.jsx";
 
 const authProtectedRoutes = [
   { path: "/buildingTable", component: <BuildingTable /> },
@@ -104,6 +107,9 @@ const authProtectedRoutes = [
   { path: "/teamManagement", component: <TeamManagement /> },
   { path: "/timeSheet", component: <TimeSheet /> },
   { path: "/metricsReport", component: <MetricsReport /> },
+  { path: "/Attachment", component: <Attachment /> },
+  { path: "/TaskComment", component: <TaskComment /> },
+  { path: "/TaskActivities", component: <TaskActivities /> },
 
   //User Profile
   { path: "/profile", component: <UserProfile /> },

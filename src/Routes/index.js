@@ -33,9 +33,9 @@ const Index = () => {
                         <Route
                             path={route.path}
                             element={
-                                <AuthProtected>
+                                
                                     <VerticalLayout>{route.component}</VerticalLayout>
-                                </AuthProtected>}
+                                }
                             key={idx}
                             exact={true}
                         />

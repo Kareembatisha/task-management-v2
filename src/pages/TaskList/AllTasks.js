@@ -196,7 +196,7 @@ const AllTasks = () => {
   }, [taskList]);
 
   useEffect(() => {
-    if (taskList && !taskList.length) {
+    if (taskList && !taskList) {
       dispatch(getTaskList());
     }
   }, [dispatch, taskList]);

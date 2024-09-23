@@ -14,14 +14,14 @@ import {
   ModalHeader,
   Row,
 } from "reactstrap";
-import BreadCrumb from "../../../Components/Common/BreadCrumb";
+import BreadCrumb from "../../Components/Common/BreadCrumb";
 import SimpleBar from "simplebar-react";
 import { Link } from "react-router-dom";
 import List from "list.js";
 //Import Flatepicker
 import Flatpickr from "react-flatpickr";
 
-const User = () => {
+const TaskActivities = () => {
   const [modal_list, setmodal_list] = useState(false);
   function tog_list() {
     setmodal_list(!modal_list);
@@ -36,7 +36,7 @@ const User = () => {
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
-          <BreadCrumb title="Member List" pageTitle="Tables" />
+          <BreadCrumb title="Task Activities List" pageTitle="Tables" />
           <Row>
             <Col lg={12}>
               <Card>
@@ -912,4 +912,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default TaskActivities;

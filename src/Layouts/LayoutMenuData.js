@@ -216,24 +216,24 @@ const Navdata = () => {
           link: "/Productivities",
           parentId: "dashboard",
         },
-        // {
-        //   id: "countryDataTable",
-        //   label: "Country",
-        //   link: "/countryDataTable",
-        //   parentId: "dashboard",
-        // },
-        // {
-        //   id: "shiftDataTable",
-        //   label: "Shift",
-        //   link: "/shiftDataTable",
-        //   parentId: "dashboard",
-        // },
-        // {
-        //   id: "GroubDataTable",
-        //   label: "Group",
-        //   link: "/groubtDataTable",
-        //   parentId: "dashboard",
-        // },
+        {
+          id: "Attachment",
+          label: "Attachment",
+          link: "/Attachment",
+          parentId: "dashboard",
+        },
+        {
+          id: "TaskComment",
+          label: "Task Comments",
+          link: "/TaskComment",
+          parentId: "dashboard",
+        },
+        {
+          id: "TaskActivities",
+          label: "Task Activities",
+          link: "/TaskActivities",
+          parentId: "dashboard",
+        },
         // {
         //   id: "systemboard",
         //   label: "Systemboard",
