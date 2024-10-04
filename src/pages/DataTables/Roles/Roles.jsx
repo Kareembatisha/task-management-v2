@@ -23,8 +23,7 @@ import Flatpickr from "react-flatpickr";
 
 
 
-const Admin = () => {
-
+const Roles = () => {
   const [modal_list, setmodal_list] = useState(false);
   function tog_list() {
     setmodal_list(!modal_list);
@@ -34,8 +33,6 @@ const Admin = () => {
   function tog_delete() {
     setmodal_delete(!modal_delete);
   }
-
- 
 
   return (
     <React.Fragment>
@@ -917,4 +914,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default Roles;

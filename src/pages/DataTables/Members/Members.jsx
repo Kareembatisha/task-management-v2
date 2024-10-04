@@ -21,7 +21,7 @@ import List from "list.js";
 //Import Flatepicker
 import Flatpickr from "react-flatpickr";
 
-const User = () => {
+const Members = () => {
   const [modal_list, setmodal_list] = useState(false);
   function tog_list() {
     setmodal_list(!modal_list);
@@ -912,4 +912,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default Members;

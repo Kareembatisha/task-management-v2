@@ -4,17 +4,17 @@ import { useNavigate } from "react-router-dom";
 const Navdata = () => {
   const history = useNavigate();
   //state data
-  const [isDashboard, setIsDashboard] = useState(false);
-  const [isApps, setIsApps] = useState(false);
-  const [isAuth, setIsAuth] = useState(false);
-  const [isPages, setIsPages] = useState(false);
-  const [isBaseUi, setIsBaseUi] = useState(false);
-  const [isAdvanceUi, setIsAdvanceUi] = useState(false);
-  const [isForms, setIsForms] = useState(false);
-  const [isTables, setIsTables] = useState(false);
-  const [isCharts, setIsCharts] = useState(false);
+  const [isHome, setIsHome] = useState(false);
+  const [isRoles, setIsRoles] = useState(false);
+  const [isAdmins, setisAdmins] = useState(false);
+  const [isDepartments, setIsDepartments] = useState(false);
+  const [isDesignation, setIsDesignation] = useState(false);
+  const [isMembers, setIsMembers] = useState(false);
+  const [isProjects, setIsProjects] = useState(false);
+  const [isTasks, setIsTasks] = useState(false);
+  const [isProductivities, setIsProductivities] = useState(false);
+  const [isReports, setIsReports] = useState(false);
   const [isIcons, setIsIcons] = useState(false);
-  const [isMaps, setIsMaps] = useState(false);
   const [isMultiLevel, setIsMultiLevel] = useState(false);
 
   //Calender
@@ -24,8 +24,6 @@ const Navdata = () => {
   const [isEmail, setEmail] = useState(false);
   const [isSubEmail, setSubEmail] = useState(false);
   const [isEcommerce, setIsEcommerce] = useState(false);
-  const [isProjects, setIsProjects] = useState(false);
-  const [isTasks, setIsTasks] = useState(false);
   const [isCRM, setIsCRM] = useState(false);
   const [isCrypto, setIsCrypto] = useState(false);
   const [isInvoices, setIsInvoices] = useState(false);
@@ -36,7 +34,7 @@ const Navdata = () => {
   const [isJobList, setIsJobList] = useState(false);
   const [isCandidateList, setIsCandidateList] = useState(false);
 
-  // Authentication
+  // Departmentsentication
   const [isSignIn, setIsSignIn] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
   const [isPasswordReset, setIsPasswordReset] = useState(false);
@@ -47,10 +45,10 @@ const Navdata = () => {
   const [isVerification, setIsVerification] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  // Pages
+  // Designation
   const [isProfile, setIsProfile] = useState(false);
 
-  // Charts
+  // Reports
   const [isApex, setIsApex] = useState(false);
 
   // Multi Level
@@ -75,41 +73,41 @@ const Navdata = () => {
 
   useEffect(() => {
     document.body.classList.remove("twocolumn-panel");
-    if (iscurrentState !== "Dashboard") {
-      setIsDashboard(false);
+    if (iscurrentState !== "Roles") {
+      setIsRoles(false);
     }
-    if (iscurrentState !== "Apps") {
-      setIsApps(false);
+    if (iscurrentState !== "Admins") {
+      setisAdmins(false);
     }
-    if (iscurrentState !== "Auth") {
-      setIsAuth(false);
+    if (iscurrentState !== "Departments") {
+      setIsDepartments(false);
     }
-    if (iscurrentState !== "Pages") {
-      setIsPages(false);
+    if (iscurrentState !== "Designation") {
+      setIsDesignation(false);
     }
     if (iscurrentState !== "Landing") {
       setIsLanding(false);
     }
-    if (iscurrentState !== "BaseUi") {
-      setIsBaseUi(false);
+    if (iscurrentState !== "Members") {
+      setIsMembers(false);
     }
-    if (iscurrentState !== "AdvanceUi") {
-      setIsAdvanceUi(false);
+    if (iscurrentState !== "Projects") {
+      setIsProjects(false);
     }
-    if (iscurrentState !== "Forms") {
-      setIsForms(false);
+    if (iscurrentState !== "Tasks") {
+      setIsTasks(false);
     }
-    if (iscurrentState !== "Tables") {
-      setIsTables(false);
+    if (iscurrentState !== "Productivities") {
+      setIsProductivities(false);
     }
-    if (iscurrentState !== "Charts") {
-      setIsCharts(false);
+    if (iscurrentState !== "Reports") {
+      setIsReports(false);
     }
     if (iscurrentState !== "Icons") {
       setIsIcons(false);
     }
-    if (iscurrentState !== "Maps") {
-      setIsMaps(false);
+    if (iscurrentState !== "Home") {
+      setIsHome(false);
     }
     if (iscurrentState !== "MuliLevel") {
       setIsMultiLevel(false);
@@ -121,17 +119,17 @@ const Navdata = () => {
   }, [
     history,
     iscurrentState,
-    isDashboard,
-    isApps,
-    isAuth,
-    isPages,
-    isBaseUi,
-    isAdvanceUi,
-    isForms,
-    isTables,
-    isCharts,
+    isRoles,
+    isAdmins,
+    isDepartments,
+    isDesignation,
+    isMembers,
+    isProjects,
+    isTasks,
+    isProductivities,
+    isReports,
     isIcons,
-    isMaps,
+    isHome,
     isMultiLevel,
   ]);
 
@@ -141,15 +139,15 @@ const Navdata = () => {
       isHeader: true,
     },
     {
-      id: "dashboard",
-      label: "Dashboards",
+      id: "Home",
+      label: "Home",
       icon: "ri-dashboard-2-line",
       link: "/#",
-      stateVariables: isDashboard,
+      stateVariables: isHome,
       click: function (e) {
         e.preventDefault();
-        setIsDashboard(!isDashboard);
-        setIscurrentState("Dashboard");
+        setIsHome(!isHome);
+        setIscurrentState("Home");
         updateIconSidebar(e);
       },
       subItems: [
@@ -157,144 +155,197 @@ const Navdata = () => {
           id: "Dashboard",
           label: "Dashboard",
           link: "/dashboard",
-          parentId: "dashboard",
+          parentId: "Home",
         },
-
+      ],
+    },
+    {
+      id: "Roles",
+      label: "Roles",
+      icon: "ri-dashboard-2-line",
+      link: "/#",
+      stateVariables: isRoles,
+      click: function (e) {
+        e.preventDefault();
+        setIsRoles(!isRoles);
+        setIscurrentState("Roles");
+        updateIconSidebar(e);
+      },
+      subItems: [
         {
-          id: "projects",
-          label: "projects",
-          link: "/projects",
-          parentId: "dashboard",
+          id: "adminDatatable",
+          label: "role",
+          link: "/roles",
+          parentId: "Roles",
         },
+      ],
+    },
+    {
+      id: "Admins",
+      label: "Admins",
+      icon: "ri-dashboard-2-line",
+      link: "/#",
+      stateVariables: isAdmins,
+      click: function (e) {
+        e.preventDefault();
+        setisAdmins(!isAdmins);
+        setIscurrentState("Admins");
+        updateIconSidebar(e);
+      },
+      subItems: [
+        {
+          id: "adminDatatable",
+          label: "Admin",
+          link: "/admins",
+          parentId: "Admins",
+        },
+      ],
+    },
+    {
+      id: "Departments",
+      label: "Departments",
+      icon: "ri-dashboard-2-line",
+      link: "/#",
+      stateVariables: isDepartments,
+      click: function (e) {
+        e.preventDefault();
+        setIsDepartments(!isDepartments);
+        setIscurrentState("Departments");
+        updateIconSidebar(e);
+      },
+      subItems: [
+        {
+          id: "adminDatatable",
+          label: "Departments",
+          link: "/Departments",
+          parentId: "Departments",
+        },
+      ],
+    },
+    {
+      id: "Designation",
+      label: "Designation",
+      icon: "ri-dashboard-2-line",
+      link: "/#",
+      stateVariables: isDesignation,
+      click: function (e) {
+        e.preventDefault();
+        setIsDesignation(!isDesignation);
+        setIscurrentState("Designation");
+        updateIconSidebar(e);
+      },
+      subItems: [
+        {
+          id: "adminDatatable",
+          label: "Designation",
+          link: "/Designation",
+          parentId: "Designation",
+        },
+      ],
+    },
+    {
+      id: "Members",
+      label: "Members",
+      icon: "ri-dashboard-2-line",
+      link: "/#",
+      stateVariables: isMembers,
+      click: function (e) {
+        e.preventDefault();
+        setIsMembers(!isMembers);
+        setIscurrentState("Members");
+        updateIconSidebar(e);
+      },
+      subItems: [
+        {
+          id: "Members",
+          label: "Member",
+          link: "/Members",
+          parentId: "Members",
+        },
+      ],
+    },
+    {
+      id: "Projects",
+      label: "Projects",
+      icon: "ri-dashboard-2-line",
+      link: "/#",
+      stateVariables: isProjects,
+      click: function (e) {
+        e.preventDefault();
+        setIsProjects(!isProjects);
+        setIscurrentState("Projects");
+        updateIconSidebar(e);
+      },
+      subItems: [
+        {
+          id: "adminDatatable",
+          label: "Projects",
+          link: "/Projects",
+          parentId: "Projects",
+        },
+      ],
+    },
+    {
+      id: "Tasks",
+      label: "Tasks",
+      icon: "ri-dashboard-2-line",
+      link: "/#",
+      stateVariables: isTasks,
+      click: function (e) {
+        e.preventDefault();
+        setIsTasks(!isTasks);
+        setIscurrentState("Tasks");
+        updateIconSidebar(e);
+      },
+      subItems: [
+        {
+          id: "adminDatatable",
+          label: "Tasks",
+          link: "/Tasks",
+          parentId: "Tasks",
+        },
+      ],
+    },
+    {
+      id: "Productivities",
+      label: "Productivities",
+      icon: "ri-dashboard-2-line",
+      link: "/#",
+      stateVariables: isProductivities,
+      click: function (e) {
+        e.preventDefault();
+        setIsProductivities(!isProductivities);
+        setIscurrentState("Productivities");
+        updateIconSidebar(e);
+      },
+      subItems: [
+        {
+          id: "adminDatatable",
+          label: "Productivities",
+          link: "/Productivities",
+          parentId: "Productivities",
+        },
+      ],
+    },
+    {
+      id: "Reports",
+      label: "Reports",
+      icon: "ri-dashboard-2-line",
+      link: "/#",
+      stateVariables: isReports,
+      click: function (e) {
+        e.preventDefault();
+        setIsReports(!isReports);
+        setIscurrentState("Reports");
+        updateIconSidebar(e);
+      },
+      subItems: [
         {
           id: "adminDatatable",
           label: "Admin",
           link: "/adminDataTable",
-          parentId: "dashboard",
+          parentId: "Reports",
         },
-        {
-          id: "TaskList",
-          label: "Task List",
-          link: "/taskList",
-          parentId: "dashboard",
-        },
-        {
-          id: "userDataTable",
-          label: "User",
-          link: "/userDataTable",
-          parentId: "dashboard",
-        },
-        {
-          id: "Designation",
-          label: "Designation",
-          link: "/Designation",
-          parentId: "dashboard",
-        },
-        {
-          id: "Departments",
-          label: "Departments",
-          link: "/Departments",
-          parentId: "dashboard",
-        },
-
-        {
-          id: "Project",
-          label: "Project",
-          link: "/Project",
-          parentId: "dashboard",
-        },
-        {
-          id: "Tasks",
-          label: "Tasks",
-          link: "/Tasks",
-          parentId: "dashboard",
-        },
-
-        {
-          id: "Productivities",
-          label: "Productivities",
-          link: "/Productivities",
-          parentId: "dashboard",
-        },
-        {
-          id: "Attachment",
-          label: "Attachment",
-          link: "/Attachment",
-          parentId: "dashboard",
-        },
-        {
-          id: "TaskComment",
-          label: "Task Comments",
-          link: "/TaskComment",
-          parentId: "dashboard",
-        },
-        {
-          id: "TaskActivities",
-          label: "Task Activities",
-          link: "/TaskActivities",
-          parentId: "dashboard",
-        },
-        // {
-        //   id: "systemboard",
-        //   label: "Systemboard",
-        //   link: "/systemboard",
-        //   parentId: "dashboard",
-        // },
-        // {
-        //   id: "userdashboard",
-        //   label: "Userdashboard",
-        //   link: "/userdashboard",
-        //   parentId: "dashboard",
-        // },
-        // {
-        //   id: "userinformation",
-        //   label: "User Information",
-        //   link: "/userinformation",
-        //   parentId: "dashboard",
-        // },
-        // {
-        //   id: "feedbackReport",
-        //   label: "Feedback Report",
-        //   link: "/feedbackReport",
-        //   parentId: "dashboard",
-        // },
-        // {
-        //   id: "RolePage",
-        //   label: "Role",
-        //   link: "/role",
-        //   parentId: "dashboard",
-        // },
-
-        // {
-        //   id: "AttendanceList ",
-        //   label: "Attendance List ",
-        //   link: "/attendanceList",
-        //   parentId: "dashboard",
-        // },
-        // {
-        //   id: "Optimus ",
-        //   label: "Optimus",
-        //   link: "/optimus",
-        //   parentId: "dashboard",
-        // },
-        // {
-        //   id: "TeamManagement ",
-        //   label: "Team Management",
-        //   link: "/teamManagement",
-        //   parentId: "dashboard",
-        // },
-        // {
-        //   id: "TimeSheet ",
-        //   label: "Time Sheet",
-        //   link: "/timeSheet",
-        //   parentId: "dashboard",
-        // },
-        // {
-        //   id: "MetricsReport ",
-        //   label: "Metrics Report",
-        //   link: "/metricsReport",
-        //   parentId: "dashboard",
-        // },
       ],
     },
   ];

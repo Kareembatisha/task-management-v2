@@ -45,13 +45,11 @@ import Feedback from "../pages/Feedback/Feedback.jsx";
 import MainUserTask from "../pages/UserTasks/MainUserTask.jsx";
 import UserDashboard from "../pages/UserDashboard/UserDashboard.jsx";
 import AdminTasks from "../pages/AdminTasks/index.js";
-import Admin from "../pages/DataTables/Admin/Admin.jsx";
 import Area from "../pages/DataTables/Area/Area.jsx";
 import City from "../pages/DataTables/City/City.jsx";
 import Country from "../pages/DataTables/Country/Country.jsx";
 import Shift from "../pages/DataTables/Shift/Shift.jsx";
 import Supervisor from "../pages/DataTables/Supervisor/Supervisor.jsx";
-import User from "../pages/DataTables/User/User.jsx";
 import SystemBoard from "../pages/SystemBoard/SystemBoard.jsx";
 import UserInformation from "../pages/UserInformation/UserInformation.jsx";
 import FeedbackReport from "../pages/FeedbackReport/FeedbackReport.jsx";
@@ -72,6 +70,10 @@ import Productivities from "../pages/DataTables/Productivities/Productivities.js
 import Attachment from "../pages/Attachment/Attachment.jsx";
 import TaskComment from "../pages/TaskComment/TaskComment.jsx";
 import TaskActivities from "../pages/TaskActivities/TaskActivities.jsx";
+import Admins from "../pages/DataTables/Admins/Admins.jsx";
+import Roles from "../pages/DataTables/Roles/Roles.jsx";
+import Members from "../pages/DataTables/Members/Members.jsx";
+import Projects from "../pages/Projects/Projects.jsx";
 
 const authProtectedRoutes = [
   { path: "/buildingTable", component: <BuildingTable /> },
@@ -79,11 +81,12 @@ const authProtectedRoutes = [
   { path: "/floorTable", component: <FloorTable /> },
   { path: "/zoneTable", component: <ZoneTable /> },
 
-  { path: "/projects", component: <Feedback /> },
+  { path: "/projects", component: <Projects /> },
   { path: "/userTasks", component: <MainUserTask /> },
   { path: "/adminTasks", component: <AdminTasks /> },
   { path: "/userDashboard", component: <UserDashboard /> },
-  { path: "/adminDataTable", component: <Admin /> },
+  { path: "/roles", component: <Roles /> },
+  { path: "/admins", component: <Admins /> },
   { path: "/Designation", component: <Designation /> },
   { path: "/Departments", component: <Departments /> },
   { path: "/Project", component: <Project /> },
@@ -95,7 +98,7 @@ const authProtectedRoutes = [
   { path: "/shiftDataTable", component: <Shift /> },
   { path: "/groubtDataTable", component: <Group /> },
   { path: "/supervisorDataTable", component: <Supervisor /> },
-  { path: "/userDataTable", component: <User /> },
+  { path: "/Members", component: <Members /> },
   { path: "/systemboard", component: <SystemBoard /> },
   { path: "/userinformation", component: <UserInformation /> },
   { path: "/feedbackReport", component: <FeedbackReport /> },
