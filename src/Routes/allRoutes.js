@@ -66,6 +66,8 @@ import Designation from "../pages/DataTables/Designation/Designation.jsx";
 import Departments from "../pages/DataTables/Departments/Departments.jsx";
 import Project from "../pages/DataTables/Project/Project.jsx";
 import Tasks from "../pages/DataTables/Tasks/Tasks.jsx";
+import TasksForm from "../pages/DataTables/Tasks/TasksForm.jsx";
+import TaskDetails from "../pages/DataTables/Tasks/TaskDetails/index.js";
 import Productivities from "../pages/DataTables/Productivities/Productivities.jsx";
 import Attachment from "../pages/Attachment/Attachment.jsx";
 import TaskComment from "../pages/TaskComment/TaskComment.jsx";
@@ -74,6 +76,7 @@ import Admins from "../pages/DataTables/Admins/Admins.jsx";
 import Roles from "../pages/DataTables/Roles/Roles.jsx";
 import Members from "../pages/DataTables/Members/Members.jsx";
 import Projects from "../pages/Projects/Projects.jsx";
+import CreateProject from "../pages/DataTables/CreateProject/CreateProject.jsx";
 
 const authProtectedRoutes = [
   { path: "/buildingTable", component: <BuildingTable /> },
@@ -82,6 +85,7 @@ const authProtectedRoutes = [
   { path: "/zoneTable", component: <ZoneTable /> },
 
   { path: "/projects", component: <Projects /> },
+  { path: "/CreateProject", component: <CreateProject /> },
   { path: "/userTasks", component: <MainUserTask /> },
   { path: "/adminTasks", component: <AdminTasks /> },
   { path: "/userDashboard", component: <UserDashboard /> },
@@ -91,6 +95,8 @@ const authProtectedRoutes = [
   { path: "/Departments", component: <Departments /> },
   { path: "/Project", component: <Project /> },
   { path: "/Tasks", component: <Tasks /> },
+  { path: "/TasksForm", component: <TasksForm /> },
+  { path: "/TaskDetails", component: <TaskDetails /> },
   { path: "/Productivities", component: <Productivities /> },
   { path: "/areaDataTable", component: <Area /> },
   { path: "/cityDataTable", component: <City /> },

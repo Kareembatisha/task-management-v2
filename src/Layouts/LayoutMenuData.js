@@ -283,6 +283,12 @@ const Navdata = () => {
           link: "/Projects",
           parentId: "Projects",
         },
+        {
+          id: "adminDatatable",
+          label: "Create",
+          link: "/CreateProject",
+          parentId: "Projects",
+        },
       ],
     },
     {
@@ -302,6 +308,18 @@ const Navdata = () => {
           id: "adminDatatable",
           label: "Tasks",
           link: "/Tasks",
+          parentId: "Tasks",
+        },
+        {
+          id: "adminDatatable",
+          label: "Tasks Form",
+          link: "/TasksForm",
+          parentId: "Tasks",
+        },
+        {
+          id: "adminDatatable",
+          label: "Task Details",
+          link: "/TaskDetails",
           parentId: "Tasks",
         },
       ],
